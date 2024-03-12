@@ -1,5 +1,5 @@
 using UnityEngine;
-using Input = UnityEngine.Input;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour
@@ -36,28 +36,51 @@ public class FirstPersonController : MonoBehaviour
 
 	private CharacterController controller;
 
-	private Quaternion characterTargetRot;
-	private Quaternion cameraTargetRot;
+	private Quaternion _characterTargetRot;
+	private Quaternion _cameraTargetRot;
 
-	private float verticalVelocity;
+	private float _verticalVelocity;
 
-	private bool sprint;
-	private bool jump;
+	private bool _sprint;
+	public bool sprint { set { _sprint = value; } }
+	private bool _jump;
+	public bool jump { set { _jump = value; } }
 
-	private void Start()
+	private Vector2 _direction;
+	public Vector2 direction{ set { _direction = value; } }
+
+	private Vector2 _lookRotation;
+	public Vector2 lookRotation { set { _lookRotation = value; } }
+
+    private void Awake()
+    {
+		if (!look)
+		{
+            Debug.LogError($"{name}: Look is null.\nCheck and assigned one.\nDisabled component.");
+            enabled = false;
+            return;
+        }
+		if (groundLayers.value == 0)
+		{
+            Debug.LogError($"{name}: Select a LayerMask.\nDisabled component.");
+            enabled = false;
+            return;
+        }
+    }
+
+    private void Start()
 	{
 		controller = GetComponent<CharacterController>();
-		characterTargetRot = transform.localRotation;
-		cameraTargetRot = look.localRotation;
+		_characterTargetRot = transform.localRotation;
+		_cameraTargetRot = look.localRotation;
 	}
+
 	void Update()
 	{
-		jump = Input.GetKeyDown(KeyCode.Space);
-		sprint = Input.GetKey(KeyCode.LeftShift);
 		GroundedCheck();
 		JumpAndGravity();
-		Move();
 		LookRotation();
+		Move();
     }
 
 	private void GroundedCheck()
@@ -65,52 +88,50 @@ public class FirstPersonController : MonoBehaviour
 		Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z);
 		grounded = Physics.CheckSphere(spherePosition, groundedRadius, groundLayers, QueryTriggerInteraction.Ignore);
 	}
+
 	private void JumpAndGravity()
 	{
-		if (grounded && jump)
+		if (grounded && _jump)
 		{
 			// the square root of H * -2 * G = how much velocity needed to reach desired height
-			verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+			_verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
 		}
 		else
 		{
 			// if we are not grounded, do not jump
-			jump = false;
+			_jump = false;
 		}
 
 		// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-		if (verticalVelocity < terminalVelocity)
-			verticalVelocity += gravity * Time.deltaTime;
+		if (_verticalVelocity < terminalVelocity)
+			_verticalVelocity += gravity * Time.deltaTime;
 	}
 
-	private void Move()
+    private void Move()
 	{
-		float hor = Input.GetAxis("Horizontal");
-		float vert = Input.GetAxis("Vertical");
+        Vector3 moveValue = new Vector3(_direction.x, 0, _direction.y);
 
-		Vector3 direction = new Vector3(hor, 0, vert);
+        moveValue = moveValue.x * transform.right + moveValue.z * transform.forward;
 
-		direction = direction.x * transform.right + direction.z * transform.forward;
-
-		// set target speed based on move speed, sprint speed and if sprint is pressed
-		float targetSpeed = sprint ? sprintSpeed : moveSpeed;
+        // set target speed based on move speed, sprint speed and if sprint is pressed
+        float targetSpeed = _sprint ? sprintSpeed : moveSpeed;
 
 		// move the player
-		controller.Move(direction.normalized * (targetSpeed * Time.deltaTime) + new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime);
+		controller.Move(moveValue.normalized * (targetSpeed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 	}
 
 	public void LookRotation()
 	{
-		float yRot = Input.GetAxis("Mouse X") * rotationSpeed;
-		float xRot = Input.GetAxis("Mouse Y") * rotationSpeed;
+		float yRot = _lookRotation.x * rotationSpeed;
+		float xRot = _lookRotation.y * rotationSpeed;
 
-		characterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
-		cameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
+		_characterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
+		_cameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
 
-		cameraTargetRot = ClampRotationAroundXAxis(cameraTargetRot);
+		_cameraTargetRot = ClampRotationAroundXAxis(_cameraTargetRot);
 
-		transform.localRotation = characterTargetRot;
-		look.localRotation = cameraTargetRot;
+		transform.localRotation = _characterTargetRot;
+		look.localRotation = _cameraTargetRot;
 	}
 
 	Quaternion ClampRotationAroundXAxis(Quaternion q)
