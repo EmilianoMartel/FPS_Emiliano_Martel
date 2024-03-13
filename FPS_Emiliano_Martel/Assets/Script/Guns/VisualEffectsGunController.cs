@@ -10,12 +10,12 @@ public class VisualEffectsGunController : MonoBehaviour
 
     private void OnEnable()
     {
-        _gun.shootMoment += StartExplotion;
+        _gun.shootMoment += HandleStartExplotion;
     }
 
     private void OnDisable()
     {
-        _gun.shootMoment -= StartExplotion;
+        _gun.shootMoment -= HandleStartExplotion;
     }
 
     private void Awake()
@@ -40,7 +40,7 @@ public class VisualEffectsGunController : MonoBehaviour
         }
     }
 
-    private void StartExplotion()
+    private void HandleStartExplotion()
     {
         _spark.Play();
         _flash.Play();

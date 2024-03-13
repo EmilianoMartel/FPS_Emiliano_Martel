@@ -23,6 +23,7 @@ public class Gun : MonoBehaviour
     private bool _isPressTrigger;
     private bool _isShooting = false;
     private bool _canShoot = true;
+    private float _timeBetweenShoot;
 
     public Action shootMoment;
 
@@ -50,6 +51,9 @@ public class Gun : MonoBehaviour
             enabled = false;
             return;
         }
+
+        //This count is to have the time between shots.
+        _timeBetweenShoot = 60 / _rateOfFire;
     }
 
     private void Update()
@@ -92,9 +96,7 @@ public class Gun : MonoBehaviour
             Debug.DrawRay(_shootPoint.position, _shootPoint.position + new Vector3(0, 0, 1000), Color.white, 2);
         }
 
-        yield return new WaitForSeconds(_rateOfFire);
-
-        
+        yield return new WaitForSeconds(_timeBetweenShoot);
 
         if (_isAutomatic)
         {
