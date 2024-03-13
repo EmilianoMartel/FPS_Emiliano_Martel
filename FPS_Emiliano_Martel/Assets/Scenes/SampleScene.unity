@@ -622,6 +622,7 @@ GameObject:
   - component: {fileID: 943243381}
   - component: {fileID: 943243380}
   - component: {fileID: 943243379}
+  - component: {fileID: 943243382}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -672,6 +673,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &943243382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943243378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be578d28afed5d4ab50252f3b0db552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthPoints: {fileID: 943243380}
+  _waitForDie: 0.1
 --- !u!1 &961183630
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,7 +742,9 @@ MonoBehaviour:
   _shootPoint: {fileID: 1340567366}
   _firstPersonController: {fileID: 848743563}
   _isAutomatic: 1
-  _rateOfFire: 700
+  _fireRate: 700
+  _maxAmmo: 50
+  _timeReload: 1
 --- !u!114 &961183633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1642,6 +1659,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 21a6ee62-e602-4a4e-adf6-39cda02f354f
     m_ActionName: Player/Sprint[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1860564836}
+        m_TargetAssemblyTypeName: PlayerInputReader, Assembly-CSharp
+        m_MethodName: SetReload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 89af048e-f530-4a3e-8958-e5b116cb892d
+    m_ActionName: Player/Reload[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

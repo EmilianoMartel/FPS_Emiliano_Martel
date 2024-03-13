@@ -18,23 +18,32 @@ public class Gun : MonoBehaviour
     [Tooltip("Set if the gun is automatic shoot.")]
     [SerializeField] private bool _isAutomatic;
     [Tooltip("Time between shoots in RPM(round per minute).")]
-    [SerializeField] private float _rateOfFire;
+    [SerializeField] private float _fireRate;
+    [Tooltip("Total ammo.")]
+    [SerializeField] private int _maxAmmo;
+    [Tooltip("The time it takes to reload the gun.")]
+    [SerializeField] private float _timeReload;
 
     private bool _isPressTrigger;
     private bool _isShooting = false;
     private bool _canShoot = true;
+    private bool _isReloaded;
+
     private float _timeBetweenShoot;
+    private int _ammoLeft;
 
     public Action shootMoment;
 
     private void OnEnable()
     {
-        _firstPersonController.shootEvent += SetPressTrigger;
+        _firstPersonController.shootEvent += HandleSetPressTrigger;
+        _firstPersonController.reloadEvent += HandleReload;
     }
 
     private void OnDisable()
     {
-        _firstPersonController.shootEvent -= SetPressTrigger;
+        _firstPersonController.shootEvent -= HandleSetPressTrigger;
+        _firstPersonController.reloadEvent -= HandleReload;
     }
 
     private void Awake()
@@ -51,20 +60,40 @@ public class Gun : MonoBehaviour
             enabled = false;
             return;
         }
+        if (_fireRate <= 0)
+        {
+            Debug.LogError($"{name}: Rate fire cannot be 0 or less.\nCheck and assigned a valid number.\nDisabled component.");
+            enabled = false;
+            return;
+        }
+        if (_maxAmmo <= 0)
+        {
+            Debug.LogError($"{name}: Max Ammo cannot be 0 or less.\nCheck and assigned a valid number.\nDisabled component.");
+            enabled = false;
+            return;
+        }
+        if (_timeReload <= 0)
+        {
+            Debug.LogError($"{name}: TimeReload cannot be 0 or less.\nCheck and assigned a valid number.\nDisabled component.");
+            enabled = false;
+            return;
+        }
 
         //This count is to have the time between shots.
-        _timeBetweenShoot = 60 / _rateOfFire;
+        _timeBetweenShoot = 60 / _fireRate;
+
+        _ammoLeft = _maxAmmo;
     }
 
     private void Update()
     {
-        if (_isPressTrigger && !_isShooting && _canShoot)
+        if (_isPressTrigger && !_isShooting && _canShoot && _ammoLeft > 0 && !_isReloaded)
         {
-            StartCoroutine(ShootMoment());
+            StartCoroutine(Shoot());
         }
     }
 
-    private void SetPressTrigger(bool pressTrigger)
+    private void HandleSetPressTrigger(bool pressTrigger)
     {
         _isPressTrigger = pressTrigger;
         if (!_isAutomatic && !pressTrigger)
@@ -73,7 +102,7 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private IEnumerator ShootMoment()
+    private IEnumerator Shoot()
     {
         _isShooting = true;
         _canShoot = false;
@@ -96,6 +125,8 @@ public class Gun : MonoBehaviour
             Debug.DrawRay(_shootPoint.position, _shootPoint.position + new Vector3(0, 0, 1000), Color.white, 2);
         }
 
+        _ammoLeft--;
+
         yield return new WaitForSeconds(_timeBetweenShoot);
 
         if (_isAutomatic)
@@ -108,5 +139,20 @@ public class Gun : MonoBehaviour
         }
 
         _isShooting = false;
+    }
+
+    private void HandleReload()
+    {
+        StartCoroutine(Reload());
+    }
+
+    private IEnumerator Reload()
+    {
+        _isReloaded = true;
+
+        yield return new WaitForSeconds(_timeReload);
+
+        _ammoLeft = _maxAmmo;
+        _isReloaded = false;
     }
 }

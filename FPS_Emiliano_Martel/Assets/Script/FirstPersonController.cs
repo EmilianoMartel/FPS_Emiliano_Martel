@@ -54,6 +54,7 @@ public class FirstPersonController : MonoBehaviour
 	public Vector2 lookRotation { set { _lookRotation = value; } }
 
 	public Action<bool> shootEvent;
+	public Action reloadEvent;
 
     private void Awake()
     {

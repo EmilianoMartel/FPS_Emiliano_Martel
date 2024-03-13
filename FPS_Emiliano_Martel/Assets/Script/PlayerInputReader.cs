@@ -39,7 +39,11 @@ public class PlayerInputReader : MonoBehaviour
 
     public void SetShoot(InputAction.CallbackContext inputContext)
     {
-        Debug.Log(inputContext.ReadValueAsButton());
         _player.shootEvent?.Invoke(inputContext.ReadValueAsButton());
+    }
+
+    public void SetReload(InputAction.CallbackContext inputContext)
+    {
+        _player.reloadEvent?.Invoke();
     }
 }
