@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class Gun : MonoBehaviour
     private bool _isPressTrigger;
     private bool _isShooting = false;
     private bool _canShoot = true;
+
+    public Action shootMoment;
 
     private void OnEnable()
     {
@@ -70,7 +73,9 @@ public class Gun : MonoBehaviour
     {
         _isShooting = true;
         _canShoot = false;
-        yield return new WaitForSeconds(_rateOfFire);
+
+        shootMoment?.Invoke();
+
         RaycastHit hit;
 
         // Does the ray intersect any objects excluding the player layer
@@ -86,6 +91,10 @@ public class Gun : MonoBehaviour
         {
             Debug.DrawRay(_shootPoint.position, _shootPoint.position + new Vector3(0, 0, 1000), Color.white, 2);
         }
+
+        yield return new WaitForSeconds(_rateOfFire);
+
+        
 
         if (_isAutomatic)
         {
