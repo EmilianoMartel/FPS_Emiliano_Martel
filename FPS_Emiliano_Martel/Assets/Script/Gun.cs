@@ -19,16 +19,18 @@ public class Gun : MonoBehaviour
     [Tooltip("Time between shoots in RPM(round per minute).")]
     [SerializeField] private float _rateOfFire;
 
-    private bool _isShooting;
+    private bool _isPressTrigger;
+    private bool _isShooting = false;
+    private bool _canShoot = true;
 
     private void OnEnable()
     {
-        _firstPersonController.shootEvent += CanShoot;
+        _firstPersonController.shootEvent += SetPressTrigger;
     }
 
     private void OnDisable()
     {
-        _firstPersonController.shootEvent -= CanShoot;
+        _firstPersonController.shootEvent -= SetPressTrigger;
     }
 
     private void Awake()
@@ -49,19 +51,26 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-        if (_isShooting)
+        if (_isPressTrigger && !_isShooting && _canShoot)
         {
-            Shoot();
+            StartCoroutine(ShootMoment());
         }
     }
 
-    private void CanShoot(bool isShooting)
+    private void SetPressTrigger(bool pressTrigger)
     {
-        _isShooting = isShooting;
+        _isPressTrigger = pressTrigger;
+        if (!_isAutomatic && !pressTrigger)
+        {
+            _canShoot = true;
+        }
     }
 
-    private void Shoot()
+    private IEnumerator ShootMoment()
     {
+        _isShooting = true;
+        _canShoot = false;
+        yield return new WaitForSeconds(_rateOfFire);
         RaycastHit hit;
 
         // Does the ray intersect any objects excluding the player layer
@@ -77,5 +86,16 @@ public class Gun : MonoBehaviour
         {
             Debug.DrawRay(_shootPoint.position, _shootPoint.position + new Vector3(0, 0, 1000), Color.white, 2);
         }
+
+        if (_isAutomatic)
+        {
+            _canShoot = true;
+        }
+        else
+        {
+            _canShoot = false;
+        }
+
+        _isShooting = false;
     }
 }

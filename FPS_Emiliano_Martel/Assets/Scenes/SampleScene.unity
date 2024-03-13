@@ -646,8 +646,8 @@ MonoBehaviour:
     m_Bits: 64
   _shootPoint: {fileID: 1340567366}
   _firstPersonController: {fileID: 848743563}
-  _isAutomatic: 0
-  _rateOfFire: 0
+  _isAutomatic: 1
+  _rateOfFire: 1
 --- !u!1 &995115386
 GameObject:
   m_ObjectHideFlags: 0

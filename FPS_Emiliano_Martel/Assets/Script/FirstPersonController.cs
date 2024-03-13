@@ -53,10 +53,6 @@ public class FirstPersonController : MonoBehaviour
 	private Vector2 _lookRotation;
 	public Vector2 lookRotation { set { _lookRotation = value; } }
 
-	private bool _isShooting = false;
-	private bool _previewState = false;
-	public bool isShooting { set { _isShooting=value; } }
-
 	public Action<bool> shootEvent;
 
     private void Awake()

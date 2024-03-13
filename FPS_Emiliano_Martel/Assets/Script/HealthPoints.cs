@@ -23,6 +23,11 @@ public class HealthPoints : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _actualLife = _maxLifePoints;
+    }
+
     public void TakeDamage(int damage)
     {
         _actualLife -= damage;
