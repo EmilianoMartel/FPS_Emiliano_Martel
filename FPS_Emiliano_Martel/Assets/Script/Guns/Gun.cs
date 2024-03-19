@@ -33,6 +33,8 @@ public class Gun : MonoBehaviour
     private int _ammoLeft;
 
     public Action shootMoment;
+    public Action<int> actualAmmo;
+    public Action<int> maxAmmo;
 
     private void OnEnable()
     {
@@ -83,6 +85,9 @@ public class Gun : MonoBehaviour
         _timeBetweenShoot = 60 / _fireRate;
 
         _ammoLeft = _maxAmmo;
+
+        maxAmmo?.Invoke(_maxAmmo);
+        actualAmmo?.Invoke(_ammoLeft);
     }
 
     private void Update()
@@ -127,6 +132,8 @@ public class Gun : MonoBehaviour
 
         _ammoLeft--;
 
+        actualAmmo?.Invoke(_ammoLeft);
+
         yield return new WaitForSeconds(_timeBetweenShoot);
 
         if (_isAutomatic)
@@ -153,6 +160,7 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(_timeReload);
 
         _ammoLeft = _maxAmmo;
+        actualAmmo?.Invoke(_ammoLeft);
         _isReloaded = false;
     }
 }
