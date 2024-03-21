@@ -14,7 +14,7 @@ public class UIHUD : MonoBehaviour
     [SerializeField] private Gun _gun;
     [SerializeField] private HealthPoints _healthPoints;
 
-    private int _maxAmmo;
+    private int _maxAmmo = 0;
 
     private void OnEnable()
     {
