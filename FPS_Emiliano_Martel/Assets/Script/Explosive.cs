@@ -7,6 +7,7 @@ public class Explosive : MonoBehaviour
 {
     [Header("Managers")]
     [SerializeField] private HealthPoints _healthPoints;
+    [SerializeField] private ParticlesEffect _particlesEffect;
     [Header("Parameters")]
     [SerializeField] private float _radius = 10f;
     [SerializeField] private float _powerExplotion = 10f;
@@ -40,6 +41,7 @@ public class Explosive : MonoBehaviour
 
     private void HandleExplotionOnDead()
     {
+        _particlesEffect.ActiveParticles();
         Vector3 explosionPos = transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, _radius);
 
