@@ -7,6 +7,7 @@ public class Character : MonoBehaviour
 {
     [SerializeField] private HealthPoints _healthPoints;
     [SerializeField] private float _waitForDie;
+
     private void OnEnable()
     {
         _healthPoints.dead += HandleDie;

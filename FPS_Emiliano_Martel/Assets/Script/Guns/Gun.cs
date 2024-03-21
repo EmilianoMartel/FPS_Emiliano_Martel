@@ -85,7 +85,10 @@ public class Gun : MonoBehaviour
         _timeBetweenShoot = 60 / _fireRate;
 
         _ammoLeft = _maxAmmo;
+    }
 
+    private void Start()
+    {
         maxAmmo?.Invoke(_maxAmmo);
         actualAmmo?.Invoke(_ammoLeft);
     }
