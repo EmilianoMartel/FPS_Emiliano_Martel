@@ -11,6 +11,10 @@ public class UIHUD : MonoBehaviour
     [SerializeField] private TMP_Text _ammoText;
     [SerializeField] private Image _maxLife;
 
+    [Header("CrossView")]
+    [SerializeField] private Color _viewEnemyColor;
+    [SerializeField] private Color _dontViewEnemyColor;
+
     [SerializeField] private Gun _gun;
     [SerializeField] private HealthPoints _healthPoints;
 
@@ -20,12 +24,14 @@ public class UIHUD : MonoBehaviour
     {
         _gun.actualAmmo += HandleChangeAmmo;
         _gun.maxAmmo += HandleMaxAmmo;
+        _gun.viewEnemy += HandleLookEnemy;
     }
 
     private void OnDisable()
     {
         _gun.actualAmmo -= HandleChangeAmmo;
         _gun.maxAmmo -= HandleMaxAmmo;
+        _gun.viewEnemy -= HandleLookEnemy;
     }
 
     private void Awake()
@@ -56,9 +62,16 @@ public class UIHUD : MonoBehaviour
         }
     }
 
-    private void LookEnemy(bool look)
+    private void HandleLookEnemy(bool look)
     {
-
+        if (look)
+        {
+            _crossHair.color = _viewEnemyColor;
+        }
+        else
+        {
+            _crossHair.color = _dontViewEnemyColor;
+        }
     }
 
     private void HandleChangeLife(float life)
