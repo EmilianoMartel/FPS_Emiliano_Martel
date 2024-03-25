@@ -23,6 +23,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private int _maxAmmo;
     [Tooltip("The time it takes to reload the gun.")]
     [SerializeField] private float _timeReload;
+    [SerializeField] private RecoilSO _recoilData;
 
     private bool _isPressTrigger;
     private bool _isShooting = false;
@@ -33,6 +34,7 @@ public class Gun : MonoBehaviour
     private int _ammoLeft;
 
     public Action shootMoment;
+    public Action<bool> viewEnemy;
     public Action<int> actualAmmo;
     public Action<int> maxAmmo;
 
@@ -99,6 +101,10 @@ public class Gun : MonoBehaviour
         {
             StartCoroutine(Shoot());
         }
+
+        RaycastHit hit;
+
+        viewEnemy?.Invoke(Physics.Raycast(_shootPoint.position, _shootPoint.forward, out hit, _shootDistance, _enemyMask));
     }
 
     private void HandleSetPressTrigger(bool pressTrigger)
@@ -124,8 +130,6 @@ public class Gun : MonoBehaviour
         {
             HealthPoints healthPoints = hit.transform.GetComponentInParent<HealthPoints>();
             healthPoints.TakeDamage(_damage);
-
-
             Debug.DrawRay(_shootPoint.position, _shootPoint.position + new Vector3(0, 0, 1000), Color.yellow, 2);
         }
         else
@@ -133,6 +137,7 @@ public class Gun : MonoBehaviour
             Debug.DrawRay(_shootPoint.position, _shootPoint.position + new Vector3(0, 0, 1000), Color.white, 2);
         }
 
+        //shootPlace?.Invoke(hit.transform);
         _ammoLeft--;
 
         actualAmmo?.Invoke(_ammoLeft);
