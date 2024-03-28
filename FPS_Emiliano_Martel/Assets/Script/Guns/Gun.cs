@@ -128,8 +128,10 @@ public class Gun : MonoBehaviour
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(_shootPoint.position, _shootPoint.forward, out hit, _shootDistance, _enemyMask))
         {
-            HealthPoints healthPoints = hit.transform.GetComponentInParent<HealthPoints>();
-            healthPoints.TakeDamage(_damage);
+            if (hit.transform.TryGetComponent<HealthPoints>(out HealthPoints hp))
+            {
+                hp.TakeDamage(_damage);
+            }
             Debug.DrawRay(_shootPoint.position, _shootPoint.position + new Vector3(0, 0, 1000), Color.yellow, 2);
         }
         else

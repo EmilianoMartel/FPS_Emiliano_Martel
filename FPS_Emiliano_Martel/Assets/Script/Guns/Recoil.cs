@@ -11,8 +11,8 @@ public class Recoil : MonoBehaviour
     [SerializeField] private Gun _gun;
 
     //Rotations
-    private Vector3 _currentRotation;
-    private Vector3 _targetRotation;
+    private Quaternion _currentRotation;
+    private Quaternion _targetRotation;
 
     private void OnEnable()
     {
@@ -36,13 +36,17 @@ public class Recoil : MonoBehaviour
 
     private void Update()
     {
-        _targetRotation = Vector3.Lerp(_targetRotation, Vector3.zero, _recoilData.returnSpeed * Time.deltaTime);
-        _currentRotation = Vector3.Slerp(_currentRotation, _targetRotation, _recoilData.snappiness * Time.fixedDeltaTime);
-        transform.localRotation = Quaternion.Euler(_currentRotation);
+        _targetRotation = Quaternion.Lerp(_targetRotation, Quaternion.identity, _recoilData.returnSpeed * Time.deltaTime);
+        _currentRotation = Quaternion.Slerp(_currentRotation, _targetRotation, _recoilData.snappiness * Time.fixedDeltaTime);
+        transform.localRotation = _currentRotation;
     }
 
     private void HandleShootMoment()
     {
-        _targetRotation += new Vector3(_recoilData.recoilX, Random.Range(_recoilData.minRecoilY, _recoilData.maxRecoilY), Random.Range(_recoilData.minRecoilZ, _recoilData.maxRecoilZ));
+        Vector3 rotation = Vector3.zero;
+        rotation.x = _recoilData.recoilX;
+        rotation.y = Random.Range(_recoilData.minRecoilY, _recoilData.maxRecoilY);
+        rotation.z = Random.Range(_recoilData.minRecoilZ, _recoilData.maxRecoilZ);
+        _targetRotation *= Quaternion.Euler(rotation);
     }
 }

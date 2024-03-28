@@ -77,9 +77,10 @@ public class FirstPersonController : MonoBehaviour
 		controller = GetComponent<CharacterController>();
 		_characterTargetRot = transform.localRotation;
 		_cameraTargetRot = look.localRotation;
+		UnityEngine.Cursor.lockState = CursorLockMode.Locked;
 	}
 
-	void Update()
+	private void Update()
 	{
 		GroundedCheck();
 		JumpAndGravity();
@@ -124,7 +125,7 @@ public class FirstPersonController : MonoBehaviour
 		controller.Move(moveValue.normalized * (targetSpeed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 	}
 
-	public void LookRotation()
+	private void LookRotation()
 	{
 		float yRot = _lookRotation.x * rotationSpeed;
 		float xRot = _lookRotation.y * rotationSpeed;
@@ -138,7 +139,7 @@ public class FirstPersonController : MonoBehaviour
 		look.localRotation = _cameraTargetRot;
 	}
 
-	Quaternion ClampRotationAroundXAxis(Quaternion q)
+	private Quaternion ClampRotationAroundXAxis(Quaternion q)
 	{
 		q.x /= q.w;
 		q.y /= q.w;
@@ -152,4 +153,6 @@ public class FirstPersonController : MonoBehaviour
 
 		return q;
 	}
+
+
 }

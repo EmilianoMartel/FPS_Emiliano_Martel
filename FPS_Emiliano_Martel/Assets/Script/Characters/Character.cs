@@ -7,6 +7,7 @@ public class Character : MonoBehaviour
 {
     [SerializeField] private HealthPoints _healthPoints;
     [SerializeField] private float _waitForDie;
+    [SerializeField] private ParticlesEffect _particleSystem;
 
     private void OnEnable()
     {
