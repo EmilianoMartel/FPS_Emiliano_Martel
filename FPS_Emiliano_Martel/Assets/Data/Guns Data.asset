@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58de2983e025dbe42a87eb0b76b96a96, type: 3}
+  m_Name: Guns Data
+  m_EditorClassIdentifier: 
+  _recoilX: 0
+  _minRecoilY: 0
+  _maxRecoilY: 0
+  _minRecoilZ: 0
+  _maxRecoilZ: 0
+  _snappiness: 0
+  _returnSpeed: 0
