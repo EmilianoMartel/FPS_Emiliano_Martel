@@ -9,14 +9,12 @@ public class UIHUD : MonoBehaviour
     [Header("Parameters")]
     [SerializeField] private RawImage _crossHair;
     [SerializeField] private TMP_Text _ammoText;
-    [SerializeField] private Image _maxLife;
 
     [Header("CrossView")]
     [SerializeField] private Color _viewEnemyColor;
     [SerializeField] private Color _dontViewEnemyColor;
 
     [SerializeField] private Gun _gun;
-    [SerializeField] private HealthPoints _healthPoints;
 
     private int _maxAmmo = 0;
 
@@ -39,12 +37,6 @@ public class UIHUD : MonoBehaviour
         if (!_gun)
         {
             Debug.LogError($"{name}: Gun is null.\nCheck and assigned one.\nDisabled component.");
-            enabled = false;
-            return;
-        }
-        if (!_healthPoints)
-        {
-            Debug.LogError($"{name}: HealthPoitns is null.\nCheck and assigned one.\nDisabled component.");
             enabled = false;
             return;
         }
@@ -72,11 +64,6 @@ public class UIHUD : MonoBehaviour
         {
             _crossHair.color = _dontViewEnemyColor;
         }
-    }
-
-    private void HandleChangeLife(float life)
-    {
-
     }
 
     private void HandleChangeAmmo(int actualAmmo)

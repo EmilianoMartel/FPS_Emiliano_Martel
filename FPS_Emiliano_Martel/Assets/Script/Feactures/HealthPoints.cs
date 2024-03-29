@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class HealthPoints : MonoBehaviour
 {
-    public Action damagedEvent;
-    public Action dead;
-
     [Tooltip("Life points must be greater than 0.")]
     [SerializeField] private int _maxLifePoints;
 
     private int _actualLife;
+
+    public Action<float> damagedEvent;
+    public Action dead;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class HealthPoints : MonoBehaviour
             Dead();
             return;
         }
-        damagedEvent?.Invoke();
+        damagedEvent?.Invoke((float)_actualLife / (float)_maxLifePoints);
 
     }
 
@@ -45,7 +45,7 @@ public class HealthPoints : MonoBehaviour
     private void BasicDamage()
     {
         _actualLife--;
-        damagedEvent?.Invoke();
+        damagedEvent?.Invoke(_actualLife / _maxLifePoints);
         if (_actualLife <= 0)
         {
             Dead();
