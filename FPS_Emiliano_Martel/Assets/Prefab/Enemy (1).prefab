@@ -227,8 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6be578d28afed5d4ab50252f3b0db552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthPoints: {fileID: 2218591611076768640}
-  _waitForDie: 0.1
+  p_healthPoints: {fileID: 2218591611076768640}
+  p_waitForDie: 1
 --- !u!54 &2218591611076768655
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -293,10 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f50ffb16712eb14daa7e257bbaa0fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageMask:
-    serializedVersion: 2
-    m_Bits: 256
-  _damage: 10
+  _damage: 1
 --- !u!1 &2218591611296667321
 GameObject:
   m_ObjectHideFlags: 0

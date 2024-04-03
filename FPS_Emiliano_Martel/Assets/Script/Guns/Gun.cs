@@ -33,10 +33,10 @@ public class Gun : MonoBehaviour
     private float _timeBetweenShoot;
     private int _ammoLeft;
 
-    public Action shootMoment;
-    public Action<bool> viewEnemy;
-    public Action<int> actualAmmo;
-    public Action<int> maxAmmo;
+    public Action shootMoment = delegate { };
+    public Action<bool> viewEnemy = delegate { };
+    public Action<int> actualAmmo = delegate { };
+    public Action<int> maxAmmo = delegate { };
 
     private void OnEnable()
     {
@@ -123,23 +123,6 @@ public class Gun : MonoBehaviour
 
         shootMoment?.Invoke();
 
-        RaycastHit hit;
-
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(_shootPoint.position, _shootPoint.forward, out hit, _shootDistance, _enemyMask))
-        {
-            if (hit.transform.TryGetComponent<HealthPoints>(out HealthPoints hp))
-            {
-                hp.TakeDamage(_damage);
-            }
-            Debug.DrawRay(_shootPoint.position, _shootPoint.position + new Vector3(0, 0, 1000), Color.yellow, 2);
-        }
-        else
-        {
-            Debug.DrawRay(_shootPoint.position, _shootPoint.position + new Vector3(0, 0, 1000), Color.white, 2);
-        }
-
-        //shootPlace?.Invoke(hit.transform);
         _ammoLeft--;
 
         actualAmmo?.Invoke(_ammoLeft);

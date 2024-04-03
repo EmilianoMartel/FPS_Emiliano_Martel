@@ -10,6 +10,7 @@ public class Recoil : MonoBehaviour
     [Header("Managers")]
     [SerializeField] private Gun _gun;
 
+    [SerializeField] private float _threshold = 0.0001f;
     //Rotations
     private Quaternion _currentRotation;
     private Quaternion _targetRotation;
@@ -36,6 +37,11 @@ public class Recoil : MonoBehaviour
 
     private void Update()
     {
+        if (Quaternion.Dot(_targetRotation, _targetRotation) < _threshold * _threshold)
+        {
+            _targetRotation = Quaternion.Euler(Vector3.one * _threshold);
+            return;
+        }
         _targetRotation = Quaternion.Lerp(_targetRotation, Quaternion.identity, _recoilData.returnSpeed * Time.deltaTime);
         _currentRotation = Quaternion.Slerp(_currentRotation, _targetRotation, _recoilData.snappiness * Time.fixedDeltaTime);
         transform.localRotation = _currentRotation;

@@ -654,7 +654,7 @@ MonoBehaviour:
   _gun: {fileID: 961183632}
   _bulletPrefab: {fileID: 1050844408}
   _pointShoot: {fileID: 38777306092117885}
-  Speed: 40
+  Speed: 70
   UseObjectPool: 0
 --- !u!4 &614990788
 Transform:
@@ -984,8 +984,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6be578d28afed5d4ab50252f3b0db552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthPoints: {fileID: 943243380}
-  _waitForDie: 1
+  p_healthPoints: {fileID: 943243380}
+  p_waitForDie: 1
 --- !u!114 &943243383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1214,6 +1214,8 @@ GameObject:
   - component: {fileID: 1050844413}
   - component: {fileID: 1050844412}
   - component: {fileID: 1050844414}
+  - component: {fileID: 1050844416}
+  - component: {fileID: 1050844415}
   m_Layer: 0
   m_Name: BulletTrail
   m_TagString: Untagged
@@ -1233,6 +1235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae2a20518acd8640a3ad899096433d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  p_healthPoints: {fileID: 1050844415}
+  p_waitForDie: 0.1
   _impactSystem: {fileID: 1050844413}
 --- !u!54 &1050844409
 Rigidbody:
@@ -6174,6 +6178,32 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1050844415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050844407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3c8b5769f4edd649ad4bcad992c47fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxLifePoints: 1
+--- !u!114 &1050844416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050844407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f50ffb16712eb14daa7e257bbaa0fbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
 --- !u!1 &1110130898
 GameObject:
   m_ObjectHideFlags: 0
@@ -7054,8 +7084,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6be578d28afed5d4ab50252f3b0db552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthPoints: {fileID: 1762245949}
-  _waitForDie: 0.1
+  p_healthPoints: {fileID: 0}
+  p_waitForDie: 0
 --- !u!136 &1762245948
 CapsuleCollider:
   m_ObjectHideFlags: 0

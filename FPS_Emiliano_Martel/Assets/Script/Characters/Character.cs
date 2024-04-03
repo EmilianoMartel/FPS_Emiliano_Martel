@@ -5,22 +5,22 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField] private HealthPoints _healthPoints;
-    [SerializeField] private float _waitForDie;
+    [SerializeField] protected HealthPoints p_healthPoints;
+    [SerializeField] protected float p_waitForDie;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
-        _healthPoints.dead += HandleDie;
+        p_healthPoints.dead += HandleDie;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
-        _healthPoints.dead -= HandleDie;
+        p_healthPoints.dead -= HandleDie;
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        if (!_healthPoints)
+        if (!p_healthPoints)
         {
             Debug.LogError($"{name}: HealthPoints is null.\nCheck and assigned one.\nDisabled component.");
             enabled = false;
@@ -28,14 +28,14 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void HandleDie()
+    protected virtual void HandleDie()
     {
         StartCoroutine(DieLogic());
     }
 
     private IEnumerator DieLogic()
     {
-        yield return new WaitForSeconds(_waitForDie);
+        yield return new WaitForSeconds(p_waitForDie);
         gameObject.SetActive(false);
     }
 }

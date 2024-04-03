@@ -153,6 +153,4 @@ public class FirstPersonController : MonoBehaviour
 
 		return q;
 	}
-
-
 }

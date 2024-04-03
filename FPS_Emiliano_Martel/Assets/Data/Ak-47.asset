@@ -18,4 +18,4 @@ MonoBehaviour:
   _minRecoilZ: -3
   _maxRecoilZ: 3
   _snappiness: 5
-  _returnSpeed: 1
+  _returnSpeed: 2
