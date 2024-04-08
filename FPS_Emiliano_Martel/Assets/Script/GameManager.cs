@@ -9,9 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Enemy> _enemyListPrefab = new List<Enemy>();
     [SerializeField] private HealthPoints _generatorLife;
     [SerializeField] private Transform _generatorPosition;
-    [SerializeField] private Transform _spawnPosition;
+    [SerializeField] private List<SpawnEnemiesController> _spawnList = new List<SpawnEnemiesController>();
     [SerializeField] private float _timeBetweenSpawns = 1;
-
     private List<Enemy> _enemyList = new List<Enemy>();
     private int _enemiesDie = 0;
 
@@ -39,7 +38,7 @@ public class GameManager : MonoBehaviour
             enabled = false;
             return;
         }
-        if (!_spawnPosition)
+        if (_spawnList.Count == 0)
         {
             Debug.LogError($"{name}: Spawn is null\nCheck and assigned one.\nDisabling component.");
             enabled = false;
@@ -68,8 +67,9 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < _enemyPerWave; i++)
         {
             yield return new WaitForSeconds(_timeBetweenSpawns);
-            Enemy enemy = Instantiate(_enemyListPrefab[0],_spawnPosition.transform.position,Quaternion.identity);
-            enemy.target = _generatorPosition;
+            int spawnIndex = RandomIndexSpawn();
+
+            Enemy enemy = _spawnList[spawnIndex].SpawnEnemy(_generatorPosition);
             if (enemy.TryGetComponent<HealthPoints>(out HealthPoints hp))
             {
                 hp.dead += HandleEnemiesDie;
@@ -91,5 +91,10 @@ public class GameManager : MonoBehaviour
     private void HandleGeneratorDie()
     {
         Debug.Log("You loose");
+    }
+
+    private int RandomIndexSpawn()
+    {
+        return Random.Range(0, _spawnList.Count);
     }
 }
