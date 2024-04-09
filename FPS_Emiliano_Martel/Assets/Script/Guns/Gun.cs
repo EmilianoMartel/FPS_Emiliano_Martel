@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Gun : Weapon,IInteract
 {
     [Header("Gun Parameters")]
     [Tooltip("Gun damage")]
@@ -23,7 +23,9 @@ public class Gun : MonoBehaviour
     [SerializeField] private int _maxAmmo;
     [Tooltip("The time it takes to reload the gun.")]
     [SerializeField] private float _timeReload;
+    [Header("Optional parameters")]
     [SerializeField] private RecoilSO _recoilData;
+    [SerializeField] private GunSlot _gunSlot;
 
     private bool _isPressTrigger;
     private bool _isShooting = false;
@@ -155,5 +157,10 @@ public class Gun : MonoBehaviour
         _ammoLeft = _maxAmmo;
         actualAmmo?.Invoke(_ammoLeft);
         _isReloaded = false;
+    }
+
+    public void HandleActionEvent()
+    {
+        _gunSlot.ChangeGun(this);
     }
 }

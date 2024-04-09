@@ -47,8 +47,8 @@ public class PlayerInputReader : MonoBehaviour
         _player.reloadEvent?.Invoke();
     }
 
-    public void SetPickUp(InputAction.CallbackContext inputContext)
+    public void SetInteract(InputAction.CallbackContext inputContext)
     {
-
+        _player.interactEvent?.Invoke();
     }
 }

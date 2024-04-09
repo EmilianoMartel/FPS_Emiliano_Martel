@@ -5,35 +5,35 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour
 {
-	public Transform look;
+    [SerializeField] private Transform look;
 	[Header("Player Movement")]
 	[Tooltip("Move speed of the character in m/s")]
-	public float moveSpeed = 4.0f;
+    [SerializeField] private float moveSpeed = 4.0f;
 	[Tooltip("Sprint speed of the character in m/s")]
-	public float sprintSpeed = 6.0f;
+    [SerializeField] private float sprintSpeed = 6.0f;
 	[Tooltip("Rotation speed of the character")]
-	public float rotationSpeed = 1.0f;
+    [SerializeField] private float rotationSpeed = 1.0f;
 
 	[Space(10)]
 	[Tooltip("The height the player can jump")]
-	public float jumpHeight = 1.2f;
+    [SerializeField] private float jumpHeight = 1.2f;
 	[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
-	public float gravity = -15.0f;
-	public float terminalVelocity = 53.0f;
+	[SerializeField] private float gravity = -15.0f;
+    [SerializeField] private float terminalVelocity = 53.0f;
 
 	[Header("Player Grounded")]
 	[Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
-	public bool grounded = true;
+    [SerializeField] private bool grounded = true;
 	[Tooltip("Offset to mark feet position")]
-	public float groundedOffset = 0.85f;
+    [SerializeField] private float groundedOffset = 0.85f;
 	[Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
-	public float groundedRadius = 0.5f;
+    [SerializeField] private float groundedRadius = 0.5f;
 	[Tooltip("What layers the character uses as ground")]
-	public LayerMask groundLayers;
+    [SerializeField] private LayerMask groundLayers;
 
 	[Header("Camera Limits")]
-	public float minCameraAngle = -90F;
-	public float maxCameraAngle = 90F;
+	[SerializeField] private float minCameraAngle = -90F;
+    [SerializeField] private float maxCameraAngle = 90F;
 
 	private CharacterController controller;
 
@@ -55,6 +55,7 @@ public class FirstPersonController : MonoBehaviour
 
 	public Action<bool> shootEvent;
 	public Action reloadEvent;
+	public Action interactEvent;
 
     private void Awake()
     {
