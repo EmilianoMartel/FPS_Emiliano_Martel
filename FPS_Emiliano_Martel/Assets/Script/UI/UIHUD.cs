@@ -14,6 +14,7 @@ public class UIHUD : MonoBehaviour
     [SerializeField] private Color _viewEnemyColor;
     [SerializeField] private Color _dontViewEnemyColor;
 
+    [Header("Observers and Guns")]
     [SerializeField] private Gun _gun;
 
     private int _maxAmmo = 0;
@@ -29,7 +30,7 @@ public class UIHUD : MonoBehaviour
     {
         _gun.actualAmmo -= HandleChangeAmmo;
         _gun.maxAmmo -= HandleMaxAmmo;
-        _gun.viewEnemy -= HandleLookEnemy;
+        _gun.viewEnemy += HandleLookEnemy;
     }
 
     private void Awake()

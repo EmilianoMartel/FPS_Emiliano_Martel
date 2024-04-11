@@ -1,8 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DataSource : ScriptableObject
+public abstract class DataSource<T> : ScriptableObject
 {
-    public Recoil recoil;
+    [SerializeField] protected T _reference;
+    [SerializeField] private bool logEnabled = true;
+
+    public T Reference
+    {
+        get => _reference;
+        set
+        {
+            if (value != null && logEnabled)
+                Debug.Log($"{name}: Changed value to {value}");
+            _reference = value;
+        }
+    }
 }

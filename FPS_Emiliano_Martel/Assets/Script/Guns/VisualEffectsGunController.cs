@@ -5,17 +5,18 @@ using UnityEngine;
 public class VisualEffectsGunController : MonoBehaviour
 {
     [SerializeField] private Gun _gun;
+    [SerializeField] private EmptyAction _shootMoment;
     [SerializeField] private ParticleSystem _spark;
     [SerializeField] private ParticleSystem _flash;
 
     private void OnEnable()
     {
-        _gun.shootMoment += HandleStartExplotion;
+        _shootMoment.Sucription(HandleStartExplotion);
     }
 
     private void OnDisable()
     {
-        _gun.shootMoment -= HandleStartExplotion;
+        _shootMoment.Unsuscribe(HandleStartExplotion);
     }
 
     private void Awake()

@@ -5,22 +5,23 @@ using UnityEngine.Pool;
 
 public class BulletPool : MonoBehaviour
 {
-    [SerializeField] private Gun _gun;
     [SerializeField] private BulletTrail _bulletPrefab;
     [SerializeField] private Transform _pointShoot;
     [SerializeField] private float Speed = 5f;
     [SerializeField] private bool UseObjectPool = false;
 
+    [SerializeField] private EmptyAction _shootMoment;
+
     private ObjectPool<BulletTrail> _bulletPool;
 
     private void OnEnable()
     {
-        _gun.shootMoment += HandleShoot;
+        _shootMoment.Sucription(HandleShoot);
     }
 
     private void OnDisable()
     {
-        _gun.shootMoment -= HandleShoot;
+        _shootMoment.Unsuscribe(HandleShoot);
     }
 
     private void Awake()
@@ -78,5 +79,10 @@ public class BulletPool : MonoBehaviour
         Instance.transform.position = _pointShoot.transform.position;
 
         Instance.Shoot(Instance.transform.position, _pointShoot.transform.forward, Speed);
+    }
+
+    private void HandleNewPointShoot(Transform pointShoot)
+    {
+        _pointShoot = pointShoot;
     }
 }

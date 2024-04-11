@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : Weapon,IInteract
+public class Gun : Weapon, IInteract
 {
     [Header("Gun Parameters")]
     [Tooltip("Gun damage")]
@@ -35,7 +35,7 @@ public class Gun : Weapon,IInteract
     private float _timeBetweenShoot;
     private int _ammoLeft;
 
-    public Action shootMoment = delegate { };
+    [SerializeField] private EmptyAction _shootEvent;
     public Action<bool> viewEnemy = delegate { };
     public Action<int> actualAmmo = delegate { };
     public Action<int> maxAmmo = delegate { };
@@ -123,7 +123,8 @@ public class Gun : Weapon,IInteract
         _isShooting = true;
         _canShoot = false;
 
-        shootMoment?.Invoke();
+        if (_shootEvent)
+            _shootEvent.InvokeEvent();
 
         _ammoLeft--;
 
@@ -161,6 +162,6 @@ public class Gun : Weapon,IInteract
 
     public void HandleActionEvent()
     {
-        _gunSlot.ChangeGun(this);
+        p_gunSlot.ChangeGun(this);
     }
 }

@@ -7,22 +7,23 @@ public class Recoil : MonoBehaviour
 {
     [Header("Recoil Parameters")]
     [SerializeField] private RecoilSO _recoilData;
-    [Header("Managers")]
-    [SerializeField] private Gun _gun;
+    [Header("Channels")]
+    [SerializeField] private EmptyAction _shootMoment;
 
     [SerializeField] private float _threshold = 0.0001f;
+
     //Rotations
     private Quaternion _currentRotation;
     private Quaternion _targetRotation;
 
     private void OnEnable()
     {
-        _gun.shootMoment += HandleShootMoment;
+        _shootMoment.Sucription(HandleShootMoment);
     }
 
     private void OnDisable()
     {
-        _gun.shootMoment += HandleShootMoment;
+        _shootMoment.Unsuscribe(HandleShootMoment);
     }
 
     private void Awake()
