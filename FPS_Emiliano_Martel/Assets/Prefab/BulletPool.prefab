@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gun: {fileID: 0}
-  _bulletPrefab: {fileID: 0}
+  _bulletPrefab: {fileID: 5063648442959634950, guid: f4dfd305b7805f74cbc78aa0c8817602,
+    type: 3}
   _pointShoot: {fileID: 0}
   Speed: 70
   UseObjectPool: 0
