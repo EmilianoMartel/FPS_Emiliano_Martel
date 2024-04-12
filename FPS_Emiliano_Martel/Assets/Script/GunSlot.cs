@@ -6,16 +6,29 @@ using UnityEngine;
 
 public class GunSlot : MonoBehaviour
 {
-    [SerializeField] private Weapon _weapon;
-    
-    public void ChangeGun(Weapon weapon)
+    [SerializeField] private WeaponChanger _weaponChanger;
+
+    private void OnEnable()
     {
-        Transform tempTransform = weapon.transform;
-        weapon.transform.position = _weapon.transform.position;
-        _weapon.transform.position = tempTransform.position;
-        _weapon.transform.parent = null;
-        weapon.transform.parent = transform;
-        weapon.transform.rotation = transform.rotation;
-        _weapon = weapon;
+        StartCoroutine(WaitForEnable());
+    }
+
+    public void ChangeGun(WeaponChanger newWeapon)
+    {
+        Transform tempTransform = newWeapon.transform;
+        newWeapon.transform.position = _weaponChanger.transform.position;
+        _weaponChanger.transform.position = tempTransform.position;
+        _weaponChanger.transform.parent = null;
+        newWeapon.transform.parent = transform;
+        newWeapon.transform.rotation = transform.rotation;
+        _weaponChanger.DesactiveWeapon();
+        newWeapon.ActiveWeapon();
+        _weaponChanger = newWeapon;
+    }
+
+    private IEnumerator WaitForEnable()
+    {
+        yield return new WaitForSeconds(1);
+        _weaponChanger.ActiveWeapon();
     }
 }

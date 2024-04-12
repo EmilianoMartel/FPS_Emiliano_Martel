@@ -18,12 +18,14 @@ public class Recoil : MonoBehaviour
 
     private void OnEnable()
     {
-        _shootMoment.Sucription(HandleShootMoment);
+        if(_shootMoment)
+            _shootMoment.Sucription(HandleShootMoment);
     }
 
     private void OnDisable()
     {
-        _shootMoment.Unsuscribe(HandleShootMoment);
+        if (_shootMoment)
+            _shootMoment.Unsuscribe(HandleShootMoment);
     }
 
     private void Awake()

@@ -17,10 +17,19 @@ public class UIHUD : MonoBehaviour
     [Header("Observers and Guns")]
     [SerializeField] private Gun _gun;
 
+    [Header("Channels")]
+    [SerializeField] private ActionChanel<int> _actualAmmoEvent;
+    [SerializeField] private ActionChanel<int> _maxAmmoEvent;
+
     private int _maxAmmo = 0;
 
     private void OnEnable()
     {
+        if (_actualAmmoEvent)
+            _actualAmmoEvent.Sucription(HandleChangeAmmo);
+        if (_maxAmmoEvent)
+            _maxAmmoEvent.Sucription(HandleMaxAmmo);
+
         _gun.actualAmmo += HandleChangeAmmo;
         _gun.maxAmmo += HandleMaxAmmo;
         _gun.viewEnemy += HandleLookEnemy;
@@ -28,6 +37,11 @@ public class UIHUD : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_actualAmmoEvent)
+            _actualAmmoEvent.Unsuscribe(HandleChangeAmmo);
+        if (_maxAmmoEvent)
+            _maxAmmoEvent.Unsuscribe(HandleMaxAmmo);
+
         _gun.actualAmmo -= HandleChangeAmmo;
         _gun.maxAmmo -= HandleMaxAmmo;
         _gun.viewEnemy += HandleLookEnemy;

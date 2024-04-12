@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IInteract
 {
-    void HandleActionEvent();
+    void InteractiveMoment();
 }

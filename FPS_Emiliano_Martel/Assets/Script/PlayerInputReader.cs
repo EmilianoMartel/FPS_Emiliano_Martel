@@ -7,6 +7,8 @@ public class PlayerInputReader : MonoBehaviour
 {
     [SerializeField] private FirstPersonController _player;
 
+    [SerializeField] private BoolChanelSo _isTriggerEvent;
+
     private void Awake()
     {
         if (!_player)
@@ -39,7 +41,7 @@ public class PlayerInputReader : MonoBehaviour
 
     public void SetShoot(InputAction.CallbackContext inputContext)
     {
-        _player.shootEvent?.Invoke(inputContext.ReadValueAsButton());
+        _isTriggerEvent.InvokeEvent(inputContext.ReadValueAsButton());
     }
 
     public void SetReload(InputAction.CallbackContext inputContext)

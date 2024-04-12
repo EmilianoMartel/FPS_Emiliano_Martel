@@ -21,7 +21,7 @@ public class DoorLogic : MonoBehaviour, IInteract
         isOpen?.Invoke(false);
     }
 
-    public void HandleActionEvent()
+    public void InteractiveMoment()
     {
         _actualState = !_actualState;
         isOpen?.Invoke(_actualState);

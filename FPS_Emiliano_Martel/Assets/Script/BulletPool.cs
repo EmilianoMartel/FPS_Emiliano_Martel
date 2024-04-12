@@ -10,18 +10,27 @@ public class BulletPool : MonoBehaviour
     [SerializeField] private float Speed = 5f;
     [SerializeField] private bool UseObjectPool = false;
 
-    [SerializeField] private EmptyAction _shootMoment;
+    [SerializeField] private EmptyAction _shootMomentEvent;
+    [SerializeField] private ActionChanel<Transform> _pointShootEvent;
 
     private ObjectPool<BulletTrail> _bulletPool;
 
     private void OnEnable()
     {
-        _shootMoment.Sucription(HandleShoot);
+        if(_shootMomentEvent)
+            _shootMomentEvent.Sucription(HandleShoot);
+
+        if (_pointShootEvent)
+            _pointShootEvent.Sucription(HandleNewPointShoot);
     }
 
     private void OnDisable()
     {
-        _shootMoment.Unsuscribe(HandleShoot);
+        if (_shootMomentEvent)
+            _shootMomentEvent.Unsuscribe(HandleShoot);
+
+        if (_pointShootEvent)
+            _pointShootEvent.Unsuscribe(HandleNewPointShoot);
     }
 
     private void Awake()

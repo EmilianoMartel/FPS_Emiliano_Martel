@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a68c487e1ad19a04ab8f9fe2526e4465, type: 3}
-  m_Name: OnShoot
+  m_Script: {fileID: 11500000, guid: 1baec400680e6e041bab57fe1597d362, type: 3}
+  m_Name: isTriggerEvent
   m_EditorClassIdentifier: 
   _config:
-    <listenerEvent>k__BackingField: 1
+    <listenerEvent>k__BackingField: 0
     <eventLog>k__BackingField: 1

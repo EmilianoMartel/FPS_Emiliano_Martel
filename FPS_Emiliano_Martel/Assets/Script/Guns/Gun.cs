@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-public class Gun : Weapon, IInteract
+public class Gun : Weapon
 {
     [Header("Gun Parameters")]
     [Tooltip("Gun damage")]
@@ -35,19 +36,31 @@ public class Gun : Weapon, IInteract
     private float _timeBetweenShoot;
     private int _ammoLeft;
 
+    [Header("Channels")]
     [SerializeField] private EmptyAction _shootEvent;
     public Action<bool> viewEnemy = delegate { };
+    [SerializeField] private ActionChanel<int> _actualAmmoEvent;
+    [SerializeField] private ActionChanel<int> _maxAmmoEvent;
+    [SerializeField] private ActionChanel<Transform> _pointShootEvent;
     public Action<int> actualAmmo = delegate { };
     public Action<int> maxAmmo = delegate { };
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+        if (_maxAmmoEvent)
+            _maxAmmoEvent.InvokeEvent(_maxAmmo);
+
+        if (_pointShootEvent)
+            _pointShootEvent.InvokeEvent(_shootPoint);
+
         _firstPersonController.shootEvent += HandleSetPressTrigger;
         _firstPersonController.reloadEvent += HandleReload;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         _firstPersonController.shootEvent -= HandleSetPressTrigger;
         _firstPersonController.reloadEvent -= HandleReload;
     }
@@ -109,7 +122,7 @@ public class Gun : Weapon, IInteract
         viewEnemy?.Invoke(Physics.Raycast(_shootPoint.position, _shootPoint.forward, out hit, _shootDistance, _enemyMask));
     }
 
-    private void HandleSetPressTrigger(bool pressTrigger)
+    protected override void HandleSetPressTrigger(bool pressTrigger)
     {
         _isPressTrigger = pressTrigger;
         if (!_isAutomatic && !pressTrigger)
@@ -127,6 +140,8 @@ public class Gun : Weapon, IInteract
             _shootEvent.InvokeEvent();
 
         _ammoLeft--;
+        if (_actualAmmoEvent)
+            _actualAmmoEvent.InvokeEvent(_ammoLeft);
 
         actualAmmo?.Invoke(_ammoLeft);
 
@@ -157,11 +172,18 @@ public class Gun : Weapon, IInteract
 
         _ammoLeft = _maxAmmo;
         actualAmmo?.Invoke(_ammoLeft);
+        if (_actualAmmoEvent)
+            _actualAmmoEvent.InvokeEvent(_ammoLeft);
         _isReloaded = false;
     }
 
-    public void HandleActionEvent()
+    public override void SendWeaponParameters()
     {
-        p_gunSlot.ChangeGun(this);
+        if(_actualAmmoEvent)
+            _actualAmmoEvent.InvokeEvent(_ammoLeft);
+        if(_maxAmmoEvent)
+            _maxAmmoEvent.InvokeEvent(_maxAmmo);
+        if(_pointShootEvent)
+            _pointShootEvent.InvokeEvent(_shootPoint);
     }
 }

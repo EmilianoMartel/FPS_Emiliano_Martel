@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class VisualEffectsGunController : MonoBehaviour
 {
-    [SerializeField] private Gun _gun;
+    [Header("EventChannels")]
     [SerializeField] private EmptyAction _shootMoment;
+    [Header("Particles")]
     [SerializeField] private ParticleSystem _spark;
     [SerializeField] private ParticleSystem _flash;
 
     private void OnEnable()
     {
-        _shootMoment.Sucription(HandleStartExplotion);
+        if(_shootMoment)
+            _shootMoment.Sucription(HandleStartExplotion);
+        _spark.gameObject.SetActive(true);
+        _flash.gameObject.SetActive(true);
     }
 
     private void OnDisable()
     {
-        _shootMoment.Unsuscribe(HandleStartExplotion);
+        if(_shootMoment)
+            _shootMoment.Unsuscribe(HandleStartExplotion);
+        _spark.gameObject.SetActive(false);
+        _flash.gameObject.SetActive(false);
     }
 
     private void Awake()
     {
-        if (!_gun)
-        {
-            Debug.LogError($"{name}: Gun is null.\nCheck and assigned one.\nDisabled component.");
-            enabled = false;
-            return;
-        }
         if (!_spark)
         {
             Debug.LogError($"{name}: Spark is null.\nCheck and assigned one.\nDisabled component.");

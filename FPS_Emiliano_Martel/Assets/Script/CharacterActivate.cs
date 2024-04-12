@@ -38,7 +38,7 @@ public class CharacterActivate : MonoBehaviour
         {
             if (hit.transform.TryGetComponent<IInteract>(out IInteract interact))
             {
-                interact.HandleActionEvent();
+                interact.InteractiveMoment();
             }
         }
     }
