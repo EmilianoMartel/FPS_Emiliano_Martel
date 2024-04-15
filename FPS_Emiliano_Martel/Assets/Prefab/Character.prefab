@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _recoilData: {fileID: 11400000, guid: 95f7605e056e31b49a48427547b6abda, type: 2}
-  _gun: {fileID: 590494159077098665}
+  _shootMoment: {fileID: 0}
   _threshold: 0.0001
 --- !u!1 &3252124208370449232
 GameObject:
@@ -393,7 +393,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6439390961182176377}
   - component: {fileID: 1892370953410893836}
-  - component: {fileID: 3333515501803111202}
   m_Layer: 0
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -429,20 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7914f7d35f4e7d4caed279cad5fdc74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapon: {fileID: 590494159077098665}
---- !u!114 &3333515501803111202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4459570519721654495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7914f7d35f4e7d4caed279cad5fdc74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weapon: {fileID: 590494159077098665}
+  _weaponChanger: {fileID: 4800192608184067417}
 --- !u!1 &5369650781070181118
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,6 +506,7 @@ GameObject:
   - component: {fileID: 590494159077098665}
   - component: {fileID: 4495224968130621489}
   - component: {fileID: 3785608096788265525}
+  - component: {fileID: 4800192608184067417}
   m_Layer: 7
   m_Name: Gun
   m_TagString: Untagged
@@ -559,7 +546,9 @@ MonoBehaviour:
   p_enemyMask:
     serializedVersion: 2
     m_Bits: 0
-  p_gunSlot: {fileID: 3333515501803111202}
+  p_gunSlot: {fileID: 0}
+  p_clickMoment: {fileID: 0}
+  p_isTriggerEvent: {fileID: 0}
   p_firstPersonController: {fileID: 7399212599417779574}
   _damage: 1
   _shootDistance: 1000
@@ -573,7 +562,11 @@ MonoBehaviour:
   _maxAmmo: 50
   _timeReload: 1
   _recoilData: {fileID: 11400000, guid: 95f7605e056e31b49a48427547b6abda, type: 2}
-  _gunSlot: {fileID: 3333515501803111202}
+  _gunSlot: {fileID: 0}
+  _shootEvent: {fileID: 0}
+  _actualAmmoEvent: {fileID: 0}
+  _maxAmmoEvent: {fileID: 0}
+  _pointShootEvent: {fileID: 0}
 --- !u!114 &4495224968130621489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,7 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4181ba6d46157de408de447574377a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gun: {fileID: 590494159077098665}
+  _shootMoment: {fileID: 0}
   _spark: {fileID: 5765197462397430376}
   _flash: {fileID: 7746739572488552902}
 --- !u!65 &3785608096788265525
@@ -610,6 +603,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.21856022, y: 0.5273634, z: 1.4953732}
   m_Center: {x: 0.3907199, y: -0.034606636, z: 0.2476868}
+--- !u!114 &4800192608184067417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7498602142690268509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf61f88f7828ba4f86e2d91a79e00b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapon: {fileID: 590494159077098665}
+  _controller: {fileID: 4495224968130621489}
+  gunSlot: {fileID: 1892370953410893836}
 --- !u!1 &8083402091130567658
 GameObject:
   m_ObjectHideFlags: 0
