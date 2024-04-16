@@ -24,6 +24,7 @@ public class Gun : Weapon
     [SerializeField] private int _maxAmmo;
     [Tooltip("The time it takes to reload the gun.")]
     [SerializeField] private float _timeReload;
+
     [Header("Optional parameters")]
     [SerializeField] private RecoilSO _recoilData;
     [SerializeField] private GunSlot _gunSlot;

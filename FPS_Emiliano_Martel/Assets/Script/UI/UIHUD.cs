@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UIHUD : MonoBehaviour
 {
     [Header("Parameters")]
-    [SerializeField] private RawImage _crossHair;
+    [SerializeField] private Image _crossHair;
     [SerializeField] private TMP_Text _ammoText;
 
     [Header("CrossView")]

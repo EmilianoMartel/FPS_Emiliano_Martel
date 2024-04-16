@@ -13,6 +13,16 @@ public class GunSlot : MonoBehaviour
         StartCoroutine(WaitForEnable());
     }
 
+    private void Awake()
+    {
+        if (!_weaponChanger)
+        {
+            Debug.LogError($"{name}: WeaponChanger is null\nCheck and assigned one.\nDisabling component.");
+            enabled = false;
+            return;
+        }
+    }
+
     public void ChangeGun(WeaponChanger newWeapon)
     {
         Transform tempTransform = newWeapon.transform;
