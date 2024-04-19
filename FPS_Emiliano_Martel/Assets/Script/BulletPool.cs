@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public class BulletPool : MonoBehaviour
 {
-    [SerializeField] private BulletTrail _bulletPrefab;
+    [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private Transform _pointShoot;
     [SerializeField] private float Speed = 5f;
     [SerializeField] private bool UseObjectPool = false;
@@ -13,7 +13,7 @@ public class BulletPool : MonoBehaviour
     [SerializeField] private EmptyAction _shootMomentEvent;
     [SerializeField] private ActionChanel<Transform> _pointShootEvent;
 
-    private ObjectPool<BulletTrail> _bulletPool;
+    private ObjectPool<Bullet> _bulletPool;
 
     private void OnEnable()
     {
@@ -35,36 +35,36 @@ public class BulletPool : MonoBehaviour
 
     private void Awake()
     {
-        _bulletPool = new ObjectPool<BulletTrail>(CreatePooledObject, OnTakeFromPool, OnReturnToPool, OnDestroyObject, false, 200, 100_000);
+        _bulletPool = new ObjectPool<Bullet>(CreatePooledObject, OnTakeFromPool, OnReturnToPool, OnDestroyObject, false, 200, 100_000);
     }
 
-    private BulletTrail CreatePooledObject()
+    private Bullet CreatePooledObject()
     {
-        BulletTrail instance = Instantiate(_bulletPrefab, Vector3.zero, Quaternion.identity);
+        Bullet instance = Instantiate(_bulletPrefab, Vector3.zero, Quaternion.identity);
         instance.Disable += ReturnObjectToPool;
         instance.gameObject.SetActive(false);
 
         return instance;
     }
 
-    private void ReturnObjectToPool(BulletTrail Instance)
+    private void ReturnObjectToPool(Bullet Instance)
     {
         _bulletPool.Release(Instance);
     }
 
-    private void OnTakeFromPool(BulletTrail Instance)
+    private void OnTakeFromPool(Bullet Instance)
     {
         Instance.gameObject.SetActive(true);
         SpawnBullet(Instance);
         Instance.transform.SetParent(transform, true);
     }
 
-    private void OnReturnToPool(BulletTrail Instance)
+    private void OnReturnToPool(Bullet Instance)
     {
         Instance.gameObject.SetActive(false);
     }
 
-    private void OnDestroyObject(BulletTrail Instance)
+    private void OnDestroyObject(Bullet Instance)
     {
         Destroy(Instance.gameObject);
     }
@@ -83,7 +83,7 @@ public class BulletPool : MonoBehaviour
         _bulletPool.Get();
     }
 
-    private void SpawnBullet(BulletTrail Instance)
+    private void SpawnBullet(Bullet Instance)
     {
         Instance.transform.position = _pointShoot.transform.position;
 

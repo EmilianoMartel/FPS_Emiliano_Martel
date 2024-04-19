@@ -30,8 +30,6 @@ public class UIHUD : MonoBehaviour
         if (_maxAmmoEvent)
             _maxAmmoEvent.Sucription(HandleMaxAmmo);
 
-        _gun.actualAmmo += HandleChangeAmmo;
-        _gun.maxAmmo += HandleMaxAmmo;
         _gun.viewEnemy += HandleLookEnemy;
     }
 
@@ -42,8 +40,6 @@ public class UIHUD : MonoBehaviour
         if (_maxAmmoEvent)
             _maxAmmoEvent.Unsuscribe(HandleMaxAmmo);
 
-        _gun.actualAmmo -= HandleChangeAmmo;
-        _gun.maxAmmo -= HandleMaxAmmo;
         _gun.viewEnemy += HandleLookEnemy;
     }
 

@@ -993,8 +993,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _crossHair: {fileID: 1077214012}
   _ammoText: {fileID: 297114915}
-  _viewEnemyColor: {r: 1, g: 0, b: 0, a: 0}
-  _dontViewEnemyColor: {r: 1, g: 1, b: 1, a: 0}
+  _viewEnemyColor: {r: 1, g: 0, b: 0, a: 1}
+  _dontViewEnemyColor: {r: 1, g: 1, b: 1, a: 1}
   _gun: {fileID: 103505803}
   _actualAmmoEvent: {fileID: 0}
   _maxAmmoEvent: {fileID: 0}
@@ -22868,6 +22868,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 771304867}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &772956462 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1892370953410893836, guid: ece627932a704ff4880c6d3bbbbb48a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1164532993}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7914f7d35f4e7d4caed279cad5fdc74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &773140267 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5054835609311017494, guid: 04ba91ef325ad4e4f8afd695f04d6909,
@@ -37738,6 +37750,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _gunSlot
+      value: 
+      objectReference: {fileID: 772956462}
+    - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: p_damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: p_gunSlot
+      value: 
+      objectReference: {fileID: 772956462}
+    - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _shootEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: aca6079765761444b9cbd9436a6ec733,
+        type: 2}
+    - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _shootPoint
+      value: 
+      objectReference: {fileID: 1752292819}
+    - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _pointShootEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 416112a9dd20b3a439877121d81c652f,
+        type: 2}
+    - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: p_isTriggerEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b6be731c33d33543891ed065a132b47,
+        type: 2}
+    - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: p_enemyMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 3252124208370449232, guid: ece627932a704ff4880c6d3bbbbb48a2,
         type: 3}
       propertyPath: m_Name
@@ -57765,6 +57820,12 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 894748003}
+    - target: {fileID: 3561689144579415097, guid: 20917384a825064459c15d6f7473dc3e,
+        type: 3}
+      propertyPath: _isTriggerEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b6be731c33d33543891ed065a132b47,
+        type: 2}
     - target: {fileID: 3561689144579415099, guid: 20917384a825064459c15d6f7473dc3e,
         type: 3}
       propertyPath: m_RootOrder
@@ -66727,6 +66788,24 @@ PrefabInstance:
       propertyPath: UseObjectPool
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5478398126759251577, guid: 484563b9b2e2cb344bc2cd082fbea689,
+        type: 3}
+      propertyPath: _bulletPrefab
+      value: 
+      objectReference: {fileID: 365504476882162781, guid: f4dfd305b7805f74cbc78aa0c8817602,
+        type: 3}
+    - target: {fileID: 5478398126759251577, guid: 484563b9b2e2cb344bc2cd082fbea689,
+        type: 3}
+      propertyPath: _pointShootEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 416112a9dd20b3a439877121d81c652f,
+        type: 2}
+    - target: {fileID: 5478398126759251577, guid: 484563b9b2e2cb344bc2cd082fbea689,
+        type: 3}
+      propertyPath: _shootMomentEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: aca6079765761444b9cbd9436a6ec733,
+        type: 2}
     - target: {fileID: 8379750846444830516, guid: 484563b9b2e2cb344bc2cd082fbea689,
         type: 3}
       propertyPath: m_Name

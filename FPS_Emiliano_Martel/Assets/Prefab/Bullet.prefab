@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 4523843547125302288}
   - component: {fileID: 6757335873065895839}
   - component: {fileID: 4000112274988657231}
-  - component: {fileID: 5063648442959634950}
   - component: {fileID: 1961379447410101133}
   - component: {fileID: 6558510129568684738}
   - component: {fileID: 4187643289670547023}
   - component: {fileID: 8770269415004322926}
   - component: {fileID: 4069468846521769748}
+  - component: {fileID: 365504476882162781}
   m_Layer: 0
-  m_Name: BulletTrail
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,21 +190,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5063648442959634950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6402738404654682243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ae2a20518acd8640a3ad899096433d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  p_healthPoints: {fileID: 4069468846521769748}
-  p_waitForDie: 0.1
-  _impactSystem: {fileID: 1961379447410101133}
 --- !u!198 &1961379447410101133
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5051,3 +5036,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxLifePoints: 1
+--- !u!114 &365504476882162781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6402738404654682243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e002f94d97ccb46a4cd9af40051b1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p_healthPoints: {fileID: 4069468846521769748}
+  p_waitForDie: 3
+  _impactSystem: {fileID: 1961379447410101133}

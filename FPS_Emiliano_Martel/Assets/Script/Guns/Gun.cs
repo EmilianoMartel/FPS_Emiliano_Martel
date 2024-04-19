@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Gun : Weapon
 {
     [Header("Gun Parameters")]
-    [Tooltip("Gun damage")]
-    [SerializeField] private int _damage;
     [Tooltip("Max shoot distance.")]
     [SerializeField] private int _shootDistance;
     [Tooltip("What layers are enemies.")]
@@ -43,8 +42,7 @@ public class Gun : Weapon
     [SerializeField] private ActionChanel<int> _actualAmmoEvent;
     [SerializeField] private ActionChanel<int> _maxAmmoEvent;
     [SerializeField] private ActionChanel<Transform> _pointShootEvent;
-    public Action<int> actualAmmo = delegate { };
-    public Action<int> maxAmmo = delegate { };
+    [SerializeField] private ActionChanel<int> _damageValueEvent;
 
     protected override void OnEnable()
     {
@@ -68,36 +66,7 @@ public class Gun : Weapon
 
     private void Awake()
     {
-        if (!_firstPersonController)
-        {
-            Debug.LogError($"{name}: FirstPersonController is null.\nCheck and assigned one.\nDisabled component.");
-            enabled = false;
-            return;
-        }
-        if (_enemyMask.value == 0)
-        {
-            Debug.LogError($"{name}: Select a LayerMask.\nDisabled component.");
-            enabled = false;
-            return;
-        }
-        if (_fireRate <= 0)
-        {
-            Debug.LogError($"{name}: Rate fire cannot be 0 or less.\nCheck and assigned a valid number.\nDisabled component.");
-            enabled = false;
-            return;
-        }
-        if (_maxAmmo <= 0)
-        {
-            Debug.LogError($"{name}: Max Ammo cannot be 0 or less.\nCheck and assigned a valid number.\nDisabled component.");
-            enabled = false;
-            return;
-        }
-        if (_timeReload <= 0)
-        {
-            Debug.LogError($"{name}: TimeReload cannot be 0 or less.\nCheck and assigned a valid number.\nDisabled component.");
-            enabled = false;
-            return;
-        }
+        NullReferenceController();
 
         //This count is to have the time between shots.
         _timeBetweenShoot = 60 / _fireRate;
@@ -107,8 +76,11 @@ public class Gun : Weapon
 
     private void Start()
     {
-        maxAmmo?.Invoke(_maxAmmo);
-        actualAmmo?.Invoke(_ammoLeft);
+        if(_maxAmmoEvent)
+            _maxAmmoEvent.InvokeEvent(_maxAmmo);
+
+        if(_actualAmmoEvent)
+            _actualAmmoEvent.InvokeEvent(_ammoLeft);
     }
 
     private void Update()
@@ -144,8 +116,6 @@ public class Gun : Weapon
         if (_actualAmmoEvent)
             _actualAmmoEvent.InvokeEvent(_ammoLeft);
 
-        actualAmmo?.Invoke(_ammoLeft);
-
         yield return new WaitForSeconds(_timeBetweenShoot);
 
         if (_isAutomatic)
@@ -172,9 +142,9 @@ public class Gun : Weapon
         yield return new WaitForSeconds(_timeReload);
 
         _ammoLeft = _maxAmmo;
-        actualAmmo?.Invoke(_ammoLeft);
-        if (_actualAmmoEvent)
+        if(_actualAmmoEvent)
             _actualAmmoEvent.InvokeEvent(_ammoLeft);
+
         _isReloaded = false;
     }
 
@@ -186,5 +156,41 @@ public class Gun : Weapon
             _maxAmmoEvent.InvokeEvent(_maxAmmo);
         if(_pointShootEvent)
             _pointShootEvent.InvokeEvent(_shootPoint);
+        if (_damageValueEvent)
+            _damageValueEvent.InvokeEvent(p_damage);
+    }
+
+    private void NullReferenceController()
+    {
+        if (!_firstPersonController)
+        {
+            Debug.LogError($"{name}: FirstPersonController is null.\nCheck and assigned one.\nDisabled component.");
+            enabled = false;
+            return;
+        }
+        if (_enemyMask.value == 0)
+        {
+            Debug.LogError($"{name}: Select a LayerMask.\nDisabled component.");
+            enabled = false;
+            return;
+        }
+        if (_fireRate <= 0)
+        {
+            Debug.LogError($"{name}: Rate fire cannot be 0 or less.\nCheck and assigned a valid number.\nDisabled component.");
+            enabled = false;
+            return;
+        }
+        if (_maxAmmo <= 0)
+        {
+            Debug.LogError($"{name}: Max Ammo cannot be 0 or less.\nCheck and assigned a valid number.\nDisabled component.");
+            enabled = false;
+            return;
+        }
+        if (_timeReload <= 0)
+        {
+            Debug.LogError($"{name}: TimeReload cannot be 0 or less.\nCheck and assigned a valid number.\nDisabled component.");
+            enabled = false;
+            return;
+        }
     }
 }

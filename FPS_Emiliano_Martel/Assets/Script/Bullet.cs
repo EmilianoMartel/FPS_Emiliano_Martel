@@ -4,14 +4,32 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 [RequireComponent(typeof(Rigidbody))]
-public class BulletTrail : Character
+public class Bullet : Character
 {
+    [Header("Parameters")]
+    [SerializeField] private int _damage = 1;
+    [SerializeField] private float _lifeTime = 10f;
+    [Header("Visual parameters")]
     [SerializeField] private ParticleSystem _impactSystem;
     [SerializeField] private IObjectPool<TrailRenderer> _trailPool;
 
+    private float _actualTime;
+
     private Rigidbody _rigidbody;
-    public delegate void OnDisableCallback(BulletTrail Instance);
+    public delegate void OnDisableCallback(Bullet Instance);
     public OnDisableCallback Disable;
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        _actualTime = 0;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+    }
 
     protected override void Awake()
     {
@@ -28,6 +46,17 @@ public class BulletTrail : Character
         }
     }
 
+    private void Update()
+    {
+        if (_actualTime >= _lifeTime)
+        {
+            HandleDie();
+            return;
+        }
+            
+        _actualTime += Time.deltaTime;
+    }
+
     public void Shoot(Vector3 Position, Vector3 Direction, float Speed)
     {
         _rigidbody.velocity = Vector3.zero;
@@ -42,6 +71,7 @@ public class BulletTrail : Character
         _impactSystem.transform.forward = -1 * transform.forward;
         _impactSystem.Play();
         _rigidbody.velocity = Vector3.zero;
+        gameObject.SetActive(false);
     }
 
     private void OnParticleSystemStopped()
@@ -51,7 +81,7 @@ public class BulletTrail : Character
 
     protected override void HandleDie()
     {
-        base.HandleDie();
+        Disable?.Invoke(this);
         _rigidbody.AddForce(Vector3.zero,ForceMode.Force);
     }
 }

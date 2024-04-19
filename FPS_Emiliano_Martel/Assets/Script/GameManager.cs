@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [Header("GameOver data")]
     [SerializeField] private BoolDataSO _winData;
     [SerializeField] private string _finalSceneName = "FinalScene";
-    private List<Enemy> _enemyList = new List<Enemy>();
+    private List<Enemy> _enemyList = new();
     private int _enemiesDie = 0;
 
     private void OnEnable()
