@@ -37750,6 +37750,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 108156706148416676, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1919
+      objectReference: {fileID: 0}
     - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
         type: 3}
       propertyPath: _gunSlot
@@ -66778,6 +66783,11 @@ PrefabInstance:
       propertyPath: _gun
       value: 
       objectReference: {fileID: 103505803}
+    - target: {fileID: 5478398126759251577, guid: 484563b9b2e2cb344bc2cd082fbea689,
+        type: 3}
+      propertyPath: _speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5478398126759251577, guid: 484563b9b2e2cb344bc2cd082fbea689,
         type: 3}
       propertyPath: _pointShoot

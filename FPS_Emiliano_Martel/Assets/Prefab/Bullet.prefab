@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8770269415004322926}
   - component: {fileID: 4069468846521769748}
   - component: {fileID: 365504476882162781}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5050,4 +5050,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p_healthPoints: {fileID: 4069468846521769748}
   p_waitForDie: 3
+  _damage: 1
+  _lifeTime: 10
   _impactSystem: {fileID: 1961379447410101133}

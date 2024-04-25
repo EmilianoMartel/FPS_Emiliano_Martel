@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,22 +14,17 @@ public class Bullet : Character
     [SerializeField] private ParticleSystem _impactSystem;
     [SerializeField] private IObjectPool<TrailRenderer> _trailPool;
 
-    private float _actualTime;
-
     private Rigidbody _rigidbody;
-    public delegate void OnDisableCallback(Bullet Instance);
-    public OnDisableCallback Disable;
+    public Action<Bullet> onDisable;
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        _actualTime = 0;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
-
     }
 
     protected override void Awake()
@@ -46,19 +42,9 @@ public class Bullet : Character
         }
     }
 
-    private void Update()
-    {
-        if (_actualTime >= _lifeTime)
-        {
-            HandleDie();
-            return;
-        }
-            
-        _actualTime += Time.deltaTime;
-    }
-
     public void Shoot(Vector3 Position, Vector3 Direction, float Speed)
     {
+        ActiveBullet();
         _rigidbody.velocity = Vector3.zero;
         transform.position = Position;
         transform.forward = Direction;
@@ -71,17 +57,25 @@ public class Bullet : Character
         _impactSystem.transform.forward = -1 * transform.forward;
         _impactSystem.Play();
         _rigidbody.velocity = Vector3.zero;
-        gameObject.SetActive(false);
-    }
-
-    private void OnParticleSystemStopped()
-    {
-        Disable?.Invoke(this);
+        HandleDie();
     }
 
     protected override void HandleDie()
     {
-        Disable?.Invoke(this);
+        onDisable?.Invoke(this);
         _rigidbody.AddForce(Vector3.zero,ForceMode.Force);
+        gameObject.SetActive(false);
+    }
+
+    private void ActiveBullet()
+    {
+        gameObject.SetActive(true);
+        StartCoroutine(WaitForDieLogic());
+    }
+
+    private IEnumerator WaitForDieLogic()
+    {
+        yield return new WaitForSeconds(_lifeTime);
+        HandleDie();
     }
 }
