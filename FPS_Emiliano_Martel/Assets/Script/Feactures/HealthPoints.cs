@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using System.Xml.Linq;
 
 public class HealthPoints : MonoBehaviour
 {
@@ -63,4 +64,17 @@ public class HealthPoints : MonoBehaviour
         dead?.Invoke();
         _actualLife = _maxLifePoints;
     }
+}
+
+public interface IHealth
+{
+    public void TakeDamage(int damage){}
+
+    [ContextMenu("Take 1 point of damage")]
+    private void BasicDamage(){}
+
+    [ContextMenu("Take total damage")]
+    private void TakeTotalDamage(){}
+
+    private void Dead(){}
 }

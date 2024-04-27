@@ -7,6 +7,7 @@ public class Enemy : Character
 {
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] protected Transform p_target;
+    [SerializeField] protected Canvas _lifeView;
 
     public Transform target { set { p_target = value; } }
 

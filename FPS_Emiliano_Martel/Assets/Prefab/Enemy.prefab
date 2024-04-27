@@ -254,9 +254,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p_healthPoints: {fileID: 2218591611076768640}
-  p_waitForDie: 0.5
+  p_waitForDie: 1.5
   _agent: {fileID: 2218591611076768642}
-  _target: {fileID: 0}
+  p_target: {fileID: 0}
+  _lifeView: {fileID: 2218591610100093572}
 --- !u!114 &6745584712335251608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,11 +516,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100008, guid: 44202c79934aa8c45b2495a49b6e99b1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8899040933186399412}
   m_SourcePrefab: {fileID: 100100000, guid: 44202c79934aa8c45b2495a49b6e99b1, type: 3}
+--- !u!95 &813096568915194618 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 44202c79934aa8c45b2495a49b6e99b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 813096568924637082}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &813096568924249362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400008, guid: 44202c79934aa8c45b2495a49b6e99b1,
     type: 3}
   m_PrefabInstance: {fileID: 813096568924637082}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &813096568924537138 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100008, guid: 44202c79934aa8c45b2495a49b6e99b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 813096568924637082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8899040933186399412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813096568924537138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead463d87807ba14886ed1ea4900c6fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p_animator: {fileID: 813096568915194618}
+  p_enemy: {fileID: 2218591611076768645}
+  _isDie: isDie

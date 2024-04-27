@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ public class Character : MonoBehaviour
 {
     [SerializeField] protected HealthPoints p_healthPoints;
     [SerializeField] protected float p_waitForDie;
+
+    public event Action<bool> onDie = delegate { };
+
 
     protected virtual void OnEnable()
     {
@@ -34,7 +38,9 @@ public class Character : MonoBehaviour
 
     private IEnumerator DieLogic()
     {
+        onDie?.Invoke(true);
         yield return new WaitForSeconds(p_waitForDie);
         gameObject.SetActive(false);
+        onDie?.Invoke(false);
     }
 }

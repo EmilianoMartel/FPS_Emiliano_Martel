@@ -270,7 +270,9 @@ MonoBehaviour:
   p_waitForDie: 0.5
   _agent: {fileID: 2218591611076768642}
   p_target: {fileID: 0}
+  _lifeView: {fileID: 2218591610100093572}
   _attackDistance: 2
+  _waitForAttack: 1.5
   _damage: 1
 --- !u!1 &2218591611296667321
 GameObject:
@@ -493,7 +495,7 @@ PrefabInstance:
     - target: {fileID: 9500000, guid: 44202c79934aa8c45b2495a49b6e99b1, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 9c8bbdbbb80196e4393f13e5d53122e8, type: 2}
+      objectReference: {fileID: 9100000, guid: 7dd7833f02c0dc64fb745274c94f94a0, type: 2}
     - target: {fileID: 13700000, guid: 44202c79934aa8c45b2495a49b6e99b1, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -517,11 +519,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100008, guid: 44202c79934aa8c45b2495a49b6e99b1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8489797249956014668}
   m_SourcePrefab: {fileID: 100100000, guid: 44202c79934aa8c45b2495a49b6e99b1, type: 3}
+--- !u!95 &813096568915194618 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 44202c79934aa8c45b2495a49b6e99b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 813096568924637082}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &813096568924249362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400008, guid: 44202c79934aa8c45b2495a49b6e99b1,
     type: 3}
   m_PrefabInstance: {fileID: 813096568924637082}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &813096568924537138 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100008, guid: 44202c79934aa8c45b2495a49b6e99b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 813096568924637082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8489797249956014668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813096568924537138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d45263bd1e9ce6448d886fbddc9427f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p_animator: {fileID: 813096568915194618}
+  p_enemy: {fileID: 2340973393146462654}
+  _isDie: isDie
+  _isAttacking: isAttacking

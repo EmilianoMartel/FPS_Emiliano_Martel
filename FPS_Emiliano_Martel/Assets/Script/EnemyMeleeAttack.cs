@@ -12,7 +12,7 @@ public class EnemyMeleeAttack : Enemy
 
     private bool _isAttacking = false;
 
-    public event Action onAttack = delegate { };
+    public event Action<bool> onAttack = delegate { };
 
     protected override void Awake()
     {
@@ -39,8 +39,10 @@ public class EnemyMeleeAttack : Enemy
     private IEnumerator Attack()
     {
         _isAttacking = true;
+        onAttack?.Invoke(true);
         yield return new WaitForSeconds(_waitForAttack);
         AttackPlayer();
         _isAttacking = false;
+        onAttack?.Invoke(false);
     }
 }
