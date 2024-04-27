@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
     [SerializeField] private NavMeshAgent _agent;
-    [SerializeField] private Transform _target;
+    [SerializeField] protected Transform p_target;
 
-    public Transform target { set { _target = value; } }
+    public Transform target { set { p_target = value; } }
 
-    private void Update()
+    protected virtual void Update()
     {
-        _agent.SetDestination(_target.transform.position);
+        _agent.SetDestination(p_target.transform.position);
     }
 }
