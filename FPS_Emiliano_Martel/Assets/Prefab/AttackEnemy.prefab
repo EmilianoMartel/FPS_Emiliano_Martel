@@ -267,10 +267,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p_healthPoints: {fileID: 2218591611076768640}
-  p_waitForDie: 0.5
-  _agent: {fileID: 2218591611076768642}
-  p_target: {fileID: 0}
+  p_waitForDie: 3.2
+  p_agent: {fileID: 2218591611076768642}
+  p_targetGenerator: {fileID: 0}
   _lifeView: {fileID: 2218591610100093572}
+  _player: {fileID: 0}
   _attackDistance: 2
   _waitForAttack: 1.5
   _damage: 1
