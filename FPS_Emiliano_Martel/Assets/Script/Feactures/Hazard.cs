@@ -18,3 +18,8 @@ public class Hazard : MonoBehaviour
         }
     }
 }
+
+public interface IHazard
+{
+    private void DoDamage() { }
+}
