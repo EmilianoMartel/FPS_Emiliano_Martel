@@ -37904,9 +37904,21 @@ PrefabInstance:
       objectReference: {fileID: 1752292819}
     - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
         type: 3}
+      propertyPath: _reloadEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: f72f6155c0e4d3d43835035d18e834e7,
+        type: 2}
+    - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
       propertyPath: _maxAmmoEvent
       value: 
       objectReference: {fileID: 11400000, guid: f5bf1647e6bc31745aec5927a2888ec8,
+        type: 2}
+    - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _isTriggerEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b6be731c33d33543891ed065a132b47,
         type: 2}
     - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
         type: 3}
@@ -37936,6 +37948,12 @@ PrefabInstance:
       propertyPath: _shootMoment
       value: 
       objectReference: {fileID: 11400000, guid: aca6079765761444b9cbd9436a6ec733,
+        type: 2}
+    - target: {fileID: 2027779210156164869, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _interactEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 5153d170c56ce3e43ba07f9555c8bb8f,
         type: 2}
     - target: {fileID: 3252124208370449232, guid: ece627932a704ff4880c6d3bbbbb48a2,
         type: 3}
@@ -37992,6 +38010,48 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7399212599417779574, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _jumpEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 43d94bedc839fc04f9ddbf926b8c5fca,
+        type: 2}
+    - target: {fileID: 7399212599417779574, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _lookEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 08c5c044b22b43343a26e73ae5873c33,
+        type: 2}
+    - target: {fileID: 7399212599417779574, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _reloadEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: f72f6155c0e4d3d43835035d18e834e7,
+        type: 2}
+    - target: {fileID: 7399212599417779574, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _sprintEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 16e47e6360e269a4d9b662fbb1ba9189,
+        type: 2}
+    - target: {fileID: 7399212599417779574, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _interactEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 5153d170c56ce3e43ba07f9555c8bb8f,
+        type: 2}
+    - target: {fileID: 7399212599417779574, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _directionEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: d85deb77a4cec3d4fb7da511fabf751c,
+        type: 2}
+    - target: {fileID: 7399212599417779574, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _isTriggerEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b6be731c33d33543891ed065a132b47,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 3333515501803111202, guid: ece627932a704ff4880c6d3bbbbb48a2, type: 3}
     m_RemovedGameObjects: []
@@ -57964,6 +58024,42 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 894748003}
+    - target: {fileID: 3561689144579415097, guid: 20917384a825064459c15d6f7473dc3e,
+        type: 3}
+      propertyPath: _jumpEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 43d94bedc839fc04f9ddbf926b8c5fca,
+        type: 2}
+    - target: {fileID: 3561689144579415097, guid: 20917384a825064459c15d6f7473dc3e,
+        type: 3}
+      propertyPath: _lookEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 08c5c044b22b43343a26e73ae5873c33,
+        type: 2}
+    - target: {fileID: 3561689144579415097, guid: 20917384a825064459c15d6f7473dc3e,
+        type: 3}
+      propertyPath: _reloadEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: f72f6155c0e4d3d43835035d18e834e7,
+        type: 2}
+    - target: {fileID: 3561689144579415097, guid: 20917384a825064459c15d6f7473dc3e,
+        type: 3}
+      propertyPath: _sprintEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 16e47e6360e269a4d9b662fbb1ba9189,
+        type: 2}
+    - target: {fileID: 3561689144579415097, guid: 20917384a825064459c15d6f7473dc3e,
+        type: 3}
+      propertyPath: _interactEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 5153d170c56ce3e43ba07f9555c8bb8f,
+        type: 2}
+    - target: {fileID: 3561689144579415097, guid: 20917384a825064459c15d6f7473dc3e,
+        type: 3}
+      propertyPath: _directionEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: d85deb77a4cec3d4fb7da511fabf751c,
+        type: 2}
     - target: {fileID: 3561689144579415097, guid: 20917384a825064459c15d6f7473dc3e,
         type: 3}
       propertyPath: _isTriggerEvent

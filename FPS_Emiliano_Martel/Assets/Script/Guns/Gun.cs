@@ -43,6 +43,8 @@ public class Gun : Weapon
     [SerializeField] private ActionChanel<int> _maxAmmoEvent;
     [SerializeField] private ActionChanel<Transform> _pointShootEvent;
     [SerializeField] private ActionChanel<int> _damageValueEvent;
+    [SerializeField] private BoolChanelSo _isTriggerEvent;
+    [SerializeField] private EmptyAction _reloadEvent;
 
     protected override void OnEnable()
     {
@@ -53,20 +55,20 @@ public class Gun : Weapon
         if (_pointShootEvent)
             _pointShootEvent.InvokeEvent(_shootPoint);
 
-        _firstPersonController.shootEvent += HandleSetPressTrigger;
-        _firstPersonController.reloadEvent += HandleReload;
+        _isTriggerEvent.Sucription(HandleSetPressTrigger);
+        _reloadEvent.Sucription(HandleReload);
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
-        _firstPersonController.shootEvent -= HandleSetPressTrigger;
-        _firstPersonController.reloadEvent -= HandleReload;
+        _isTriggerEvent.Unsuscribe(HandleSetPressTrigger);
+        _reloadEvent.Unsuscribe(HandleReload);
     }
 
     private void Awake()
     {
-        NullReferenceController();
+        Validate();
 
         //This count is to have the time between shots.
         _timeBetweenShoot = 60 / _fireRate;
@@ -76,10 +78,10 @@ public class Gun : Weapon
 
     private void Start()
     {
-        if(_maxAmmoEvent)
+        if (_maxAmmoEvent)
             _maxAmmoEvent.InvokeEvent(_maxAmmo);
 
-        if(_actualAmmoEvent)
+        if (_actualAmmoEvent)
             _actualAmmoEvent.InvokeEvent(_ammoLeft);
     }
 
@@ -142,7 +144,7 @@ public class Gun : Weapon
         yield return new WaitForSeconds(_timeReload);
 
         _ammoLeft = _maxAmmo;
-        if(_actualAmmoEvent)
+        if (_actualAmmoEvent)
             _actualAmmoEvent.InvokeEvent(_ammoLeft);
 
         _isReloaded = false;
@@ -150,17 +152,17 @@ public class Gun : Weapon
 
     public override void SendWeaponParameters()
     {
-        if(_actualAmmoEvent)
+        if (_actualAmmoEvent)
             _actualAmmoEvent.InvokeEvent(_ammoLeft);
-        if(_maxAmmoEvent)
+        if (_maxAmmoEvent)
             _maxAmmoEvent.InvokeEvent(_maxAmmo);
-        if(_pointShootEvent)
+        if (_pointShootEvent)
             _pointShootEvent.InvokeEvent(_shootPoint);
         if (_damageValueEvent)
             _damageValueEvent.InvokeEvent(p_damage);
     }
 
-    private void NullReferenceController()
+    private void Validate()
     {
         if (!_firstPersonController)
         {

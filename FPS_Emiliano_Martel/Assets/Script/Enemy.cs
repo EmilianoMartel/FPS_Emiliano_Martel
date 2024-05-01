@@ -16,6 +16,12 @@ public class Enemy : Character
 
     public Transform target { set { p_targetGenerator = value; } }
 
+    protected override void Awake()
+    {
+        base.Awake();
+        p_agent.speed = p_speed;
+    }
+
     protected virtual void Update()
     {
         Move();

@@ -9,17 +9,18 @@ public class CharacterActivate : MonoBehaviour
     [SerializeField] private FirstPersonController _character;
     [SerializeField] private Transform _look;
     [SerializeField] private float _distance;
+    [SerializeField] private EmptyAction _interactEvent;
 
     public Action viewInteractObject = delegate { };
 
     private void OnEnable()
     {
-        _character.interactEvent += ViewActiveObject;
+        _interactEvent.Sucription(ViewActiveObject);
     }
 
     private void OnDisable()
     {
-        _character.interactEvent -= ViewActiveObject;
+        _interactEvent.Unsuscribe(ViewActiveObject);
     }
 
     private void Awake()

@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        NullReferenceCheck();
+        Validate();
     }
 
     private void Start()
@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
         return Random.Range(0, _spawnList.Count);
     }
 
-    private void NullReferenceCheck()
+    private void Validate()
     {
         if (!_generatorPosition)
         {

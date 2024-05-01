@@ -35,7 +35,16 @@ public class FirstPersonController : MonoBehaviour
 	[SerializeField] private float minCameraAngle = -90F;
     [SerializeField] private float maxCameraAngle = 90F;
 
-	private CharacterController controller;
+	[Header("Channels")]
+    [SerializeField] private BoolChanelSo _isTriggerEvent;
+    [SerializeField] private Vector2Channel _directionEvent;
+    [SerializeField] private Vector2Channel _lookEvent;
+    [SerializeField] private EmptyAction _jumpEvent;
+    [SerializeField] private BoolChanelSo _sprintEvent;
+    [SerializeField] private EmptyAction _reloadEvent;
+    [SerializeField] private EmptyAction _interactEvent;
+
+    private CharacterController controller;
 
 	private Quaternion _characterTargetRot;
 	private Quaternion _cameraTargetRot;
@@ -43,19 +52,25 @@ public class FirstPersonController : MonoBehaviour
 	private float _verticalVelocity;
 
 	private bool _sprint;
-	public bool sprint { set { _sprint = value; } }
 	private bool _jump;
-	public bool jump { set { _jump = value; } }
-
 	private Vector2 _direction;
-	public Vector2 direction{ set { _direction = value; } }
-
 	private Vector2 _lookRotation;
-	public Vector2 lookRotation { set { _lookRotation = value; } }
 
-	public Action<bool> shootEvent;
-	public Action reloadEvent;
-	public Action interactEvent;
+    private void OnEnable()
+    {
+		_directionEvent.Sucription(HandleDirection);
+		_lookEvent.Sucription(HandleLook);
+		_jumpEvent.Sucription(HandleJump);
+		_sprintEvent.Sucription(HandleSprint);
+    }
+
+    private void OnDisable()
+    {
+        _directionEvent.Unsuscribe(HandleDirection);
+        _lookEvent.Unsuscribe(HandleLook);
+		_jumpEvent.Unsuscribe(HandleJump);
+        _sprintEvent.Unsuscribe(HandleSprint);
+    }
 
     private void Awake()
     {
@@ -153,5 +168,25 @@ public class FirstPersonController : MonoBehaviour
 		q.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleX);
 
 		return q;
+	}
+
+	private void HandleJump()
+	{
+		_jump = true;
+	}
+
+	private void HandleDirection(Vector2 dir)
+	{
+		_direction = dir;
+	}
+
+	private void HandleLook(Vector2 dir)
+	{
+		_lookRotation = dir;
+	}
+
+	private void HandleSprint(bool sprint)
+	{
+		_sprint = sprint;
 	}
 }
