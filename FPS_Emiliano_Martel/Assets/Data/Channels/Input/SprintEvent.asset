@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1baec400680e6e041bab57fe1597d362, type: 3}
+  m_Name: SprintEvent
+  m_EditorClassIdentifier: 
+  _config:
+    <listenerEvent>k__BackingField: 0
+    <eventLog>k__BackingField: 0
