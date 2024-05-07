@@ -14,10 +14,8 @@ public class UIHUD : MonoBehaviour
     [SerializeField] private Color _viewEnemyColor;
     [SerializeField] private Color _dontViewEnemyColor;
 
-    [Header("Observers and Guns")]
-    [SerializeField] private Gun _gun;
-
     [Header("Channels")]
+    [SerializeField] private BoolChanelSo _isViewEnemy;
     [SerializeField] private ActionChanel<int> _actualAmmoEvent;
     [SerializeField] private ActionChanel<int> _maxAmmoEvent;
 
@@ -30,7 +28,7 @@ public class UIHUD : MonoBehaviour
         if (_maxAmmoEvent)
             _maxAmmoEvent.Sucription(HandleMaxAmmo);
 
-        _gun.viewEnemy += HandleLookEnemy;
+        _isViewEnemy?.Sucription(HandleLookEnemy);
     }
 
     private void OnDisable()
@@ -40,17 +38,11 @@ public class UIHUD : MonoBehaviour
         if (_maxAmmoEvent)
             _maxAmmoEvent.Unsuscribe(HandleMaxAmmo);
 
-        _gun.viewEnemy += HandleLookEnemy;
+        _isViewEnemy?.Unsuscribe(HandleLookEnemy);
     }
 
     private void Awake()
     {
-        if (!_gun)
-        {
-            Debug.LogError($"{name}: Gun is null.\nCheck and assigned one.\nDisabled component.");
-            enabled = false;
-            return;
-        }
         if (_crossHair == null)
         {
             Debug.LogError($"{name}: CrossHair is null.\nCheck and assigned one.\nDisabled component.");

@@ -6,26 +6,20 @@ using UnityEngine.UI;
 public class UiLife : MonoBehaviour
 {
     [SerializeField] private Image _maxLife;
-    [SerializeField] private HealthPoints _healthPoints;
+    [SerializeField] private ActionChanel<float> _health;
 
     private void OnEnable()
     {
-        _healthPoints.damagedEvent += HandleChangeLife;
+        _health?.Sucription(HandleChangeLife);
     }
 
     private void OnDisable()
     {
-        _healthPoints.damagedEvent -= HandleChangeLife;
+        _health?.Unsuscribe(HandleChangeLife);
     }
 
     private void Awake()
     {
-        if (_healthPoints == null)
-        {
-            Debug.LogError($"{name}: HealthPoints is null.\nCheck and assigned one.\nDisabled component.");
-            enabled = false;
-            return;
-        }
         if (_maxLife == null)
         {
             Debug.LogError($"{name}: MaxLife is null.\nCheck and assigned one.\nDisabled component.");
