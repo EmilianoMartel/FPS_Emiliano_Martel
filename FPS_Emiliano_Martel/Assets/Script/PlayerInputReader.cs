@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputReader : MonoBehaviour
 {
+    [Header("Parameters")]
+    [SerializeField] private string _pauseMenu = "Pause";
+    [SerializeField] private string _gameUi = "Play";
+    [Header("Channels")]
     [SerializeField] private BoolChanelSo _isTriggerEvent;
     [SerializeField] private Vector2Channel _directionEvent;
     [SerializeField] private Vector2Channel _lookEvent;
@@ -12,6 +17,21 @@ public class PlayerInputReader : MonoBehaviour
     [SerializeField] private BoolChanelSo _sprintEvent;
     [SerializeField] private EmptyAction _reloadEvent;
     [SerializeField] private EmptyAction _interactEvent;
+    [SerializeField] private StringChannel _menuNameEvent;
+    [SerializeField] private BoolChanelSo _startedGame;
+
+    private bool _paused = false;
+    private bool _isPlaying = false;
+
+    private void OnEnable()
+    {
+        _startedGame?.Sucription(HandleStartedGame);
+    }
+
+    private void OnDisable()
+    {
+        _startedGame?.Unsuscribe(HandleStartedGame);
+    }
 
     public void SetMoveValue(InputAction.CallbackContext inputContext)
     {
@@ -46,5 +66,23 @@ public class PlayerInputReader : MonoBehaviour
     public void SetInteract(InputAction.CallbackContext inputContext)
     {
         _interactEvent.InvokeEvent();
+    }
+
+    public void SetPause(InputAction.CallbackContext inputContext)
+    {
+        if(_isPlaying && inputContext.started && !_paused && _isPlaying)
+        {
+            _menuNameEvent?.InvokeEvent(_pauseMenu);
+            _paused = true;
+        }else if (_isPlaying && inputContext.started && _paused)
+        {
+            _menuNameEvent?.InvokeEvent(_gameUi);
+            _paused = false;
+        }
+    }
+
+    private void HandleStartedGame(bool isPlaying)
+    {
+        _isPlaying = isPlaying;
     }
 }

@@ -8,7 +8,6 @@ public class MenuManager : MonoBehaviour
 
     [Header("Channels")]
     [SerializeField] private StringChannel _menuNameEvent;
-    [SerializeField] private EmptyAction _playEvent;
 
     private void OnEnable()
     {
@@ -22,9 +21,6 @@ public class MenuManager : MonoBehaviour
 
     private void HandleMenu(string name)
     {
-        if (name == "Play")
-            _playEvent?.InvokeEvent();
-
         if (name == "Exit")
         {
 #if UNITY_EDITOR
@@ -36,7 +32,7 @@ public class MenuManager : MonoBehaviour
 
         foreach (var menu in _menues)
         {
-            if (menu.name == name)
+            if (menu.menuName == name)
             {
                 menu.HandleActiveMenu(true);
                 continue;

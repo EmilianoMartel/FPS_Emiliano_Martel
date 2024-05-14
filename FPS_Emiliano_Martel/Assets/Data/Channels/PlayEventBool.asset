@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18512138815901b4bbaadacf52ce9297, type: 3}
-  m_Name: MenuNameData
+  m_Script: {fileID: 11500000, guid: 1baec400680e6e041bab57fe1597d362, type: 3}
+  m_Name: PlayEventBool
   m_EditorClassIdentifier: 
   _config:
     <listenerEvent>k__BackingField: 0

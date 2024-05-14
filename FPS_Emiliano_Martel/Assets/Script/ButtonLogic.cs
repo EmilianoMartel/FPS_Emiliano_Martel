@@ -8,6 +8,8 @@ public class ButtonLogic : MonoBehaviour
 {
     [SerializeField] private Button _button;
     [SerializeField] private TMPro.TMP_Text _text;
+    [SerializeField] private string _playName = "Play";
+    [SerializeField] private BoolChanelSo _startedGame;
     private string _nameMenu;
     private StringChannel _menuNameEvent;
     public string nameMenu { set { _nameMenu = value; } }
@@ -26,5 +28,9 @@ public class ButtonLogic : MonoBehaviour
     private void InvokeEvent()
     {
         _menuNameEvent?.InvokeEvent(_nameMenu);
+        if (_nameMenu == _playName)
+            _startedGame?.InvokeEvent(true);
+        if(_nameMenu == "Menu")
+            _startedGame?.InvokeEvent(false);
     }
 }

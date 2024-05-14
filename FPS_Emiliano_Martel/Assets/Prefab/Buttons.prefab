@@ -284,3 +284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _button: {fileID: 3153008186007879124}
   _text: {fileID: 7804639067262356819}
+  _playName: Play
+  _playEvent: {fileID: 11400000, guid: 1ffb3da893ba0b34597dc2addf22d889, type: 2}
+  _startedGame: {fileID: 11400000, guid: db76f8a20b4b617438a5e3aaa3f01d94, type: 2}

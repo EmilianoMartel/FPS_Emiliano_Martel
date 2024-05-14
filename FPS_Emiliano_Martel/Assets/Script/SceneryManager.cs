@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,20 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class SceneryManager : MonoBehaviour
 {
-    [SerializeField] private EmptyAction _playEvent;
+    [SerializeField] private Camera _camera;
+    [SerializeField] private BoolChanelSo _startedGame;
     [SerializeField] private StringChannel _menuNameEvent;
-    [SerializeField] private string _mainMenuName = "MainMenu";
+    [SerializeField] private string _mainMenuName = "Menu";
+    [SerializeField] private string _loadingUI = "Loading";
     [SerializeField] private int _level1Index = 2;
     [SerializeField] private int _menusIndex = 1;
 
     private void OnEnable()
     {
-        _playEvent?.Sucription(HandlePlayeEvent);   
+        _startedGame?.Sucription(HandlePlayedEvent);   
     }
 
     private void OnDisable()
     {
-        _playEvent?.Unsuscribe(HandlePlayeEvent);
+        _startedGame?.Unsuscribe(HandlePlayedEvent);
     }
 
     private void Awake()
@@ -33,8 +36,34 @@ public class SceneryManager : MonoBehaviour
         _menuNameEvent?.InvokeEvent(_mainMenuName);
     }
 
-    private void HandlePlayeEvent()
+    private void HandlePlayedEvent(bool isPlaying)
     {
-        SceneManager.LoadSceneAsync(_level1Index,LoadSceneMode.Additive);
+        if (isPlaying)
+        {
+            StartCoroutine(LoadGame());
+            
+        }
+        else
+        {
+            StartCoroutine(UnloadGame());
+        }
+    }
+
+    private IEnumerator LoadGame()
+    {
+        _menuNameEvent?.InvokeEvent(_loadingUI);
+        var temp = SceneManager.LoadSceneAsync(_level1Index, LoadSceneMode.Additive);
+        yield return new WaitUntil(() => temp.isDone);
+        _menuNameEvent?.InvokeEvent("Play");
+        _camera.gameObject.SetActive(false);
+    }
+
+    private IEnumerator UnloadGame()
+    {
+        _menuNameEvent?.InvokeEvent(_loadingUI);
+        var temp = SceneManager.UnloadSceneAsync(_level1Index);
+        yield return new WaitUntil(() => temp.isDone);
+        _menuNameEvent?.InvokeEvent("Play");
+        _camera.gameObject.SetActive(true);
     }
 }
