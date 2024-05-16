@@ -4,25 +4,33 @@ using UnityEngine;
 
 public class PauseLogic : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField] private BoolChanelSo _startedGame;
 
     private void OnEnable()
     {
-        
+        _startedGame?.Sucription(PauseGame);
     }
 
     private void OnDisable()
     {
-        
+        _startedGame?.Unsuscribe(PauseGame);
     }
 
-    private void PauseGame()
+    private void Awake()
     {
-        Time.timeScale = 0;
+        if (!_startedGame)
+        {
+            Debug.LogError($"{name}: Started Game Channel is null.\nCheck and assigned one.\nDisabling component.");
+            enabled= false;
+            return;
+        }
     }
 
-    private void ResumeGame()
+    private void PauseGame(bool isPlaying)
     {
-        Time.timeScale = 1;
+        if(isPlaying)
+            Time.timeScale = 1;
+        else
+            Time.timeScale = 0;
     }
 }

@@ -93,7 +93,6 @@ public class FirstPersonController : MonoBehaviour
 		controller = GetComponent<CharacterController>();
 		_characterTargetRot = transform.localRotation;
 		_cameraTargetRot = look.localRotation;
-		UnityEngine.Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	private void Update()

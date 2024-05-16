@@ -61,6 +61,6 @@ public class SceneryManager : MonoBehaviour
         _menuNameEvent?.InvokeEvent(_loadingUI);
         var temp = SceneManager.UnloadSceneAsync(_level1Index);
         yield return new WaitUntil(() => temp.isDone);
-        _menuNameEvent?.InvokeEvent("MainMenu");
+        _menuNameEvent?.InvokeEvent("Menu");
     }
 }

@@ -11,7 +11,6 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected GunSlot p_gunSlot;
 
     [Header("Channels")]
-    [SerializeField] protected EmptyAction p_clickMoment;
     [SerializeField] protected BoolChanelSo p_isTriggerEvent;
 
     [Header("Manager")]
