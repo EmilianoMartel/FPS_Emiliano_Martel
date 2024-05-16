@@ -23,6 +23,8 @@ public class ButtonLogic : MonoBehaviour
     public void SetButton()
     {
         _text.text = _nameMenu;
+        if (_nameMenu == "Resume")
+            _text.text = "Play";
     }
 
     private void InvokeEvent()

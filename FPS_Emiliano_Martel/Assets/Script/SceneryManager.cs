@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneryManager : MonoBehaviour
 {
-    [SerializeField] private Camera _camera;
     [SerializeField] private BoolChanelSo _startedGame;
     [SerializeField] private StringChannel _menuNameEvent;
     [SerializeField] private string _mainMenuName = "Menu";
@@ -55,7 +54,6 @@ public class SceneryManager : MonoBehaviour
         var temp = SceneManager.LoadSceneAsync(_level1Index, LoadSceneMode.Additive);
         yield return new WaitUntil(() => temp.isDone);
         _menuNameEvent?.InvokeEvent("Play");
-        _camera.gameObject.SetActive(false);
     }
 
     private IEnumerator UnloadGame()
@@ -63,7 +61,6 @@ public class SceneryManager : MonoBehaviour
         _menuNameEvent?.InvokeEvent(_loadingUI);
         var temp = SceneManager.UnloadSceneAsync(_level1Index);
         yield return new WaitUntil(() => temp.isDone);
-        _menuNameEvent?.InvokeEvent("Play");
-        _camera.gameObject.SetActive(true);
+        _menuNameEvent?.InvokeEvent("MainMenu");
     }
 }

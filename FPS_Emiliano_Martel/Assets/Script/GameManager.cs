@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
             {
                 hp.dead += HandleEnemiesDie;
             }
+            enemy.transform.parent = transform;
             _enemyList.Add(enemy);
         }
     }

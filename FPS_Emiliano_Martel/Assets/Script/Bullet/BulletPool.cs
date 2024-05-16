@@ -68,6 +68,7 @@ public class BulletPool : MonoBehaviour
         {
             Bullet temp = Instantiate(_bulletPrefab, _pointShoot.position, Quaternion.identity);
             temp.onDisable += HandleDesactiveBullet;
+            temp.transform.parent = transform;
             return temp;
         }
 
