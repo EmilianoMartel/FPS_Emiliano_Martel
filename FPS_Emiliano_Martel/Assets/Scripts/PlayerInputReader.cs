@@ -73,10 +73,16 @@ public class PlayerInputReader : MonoBehaviour
         if(_isPlaying && inputContext.started && !_paused && _isPlaying)
         {
             _menuNameEvent?.InvokeEvent(_pauseMenu);
+
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+
             _paused = true;
         }else if (_isPlaying && inputContext.started && _paused)
         {
             _menuNameEvent?.InvokeEvent(_gameUi);
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
             _paused = false;
         }
     }

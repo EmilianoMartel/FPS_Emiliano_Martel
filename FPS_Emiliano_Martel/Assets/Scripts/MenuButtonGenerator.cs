@@ -16,7 +16,7 @@ public class MenuButtonGenerator : MonoBehaviour
         for (int i = 0; i < _buttonsName.Count; i++)
         {
             var temp = Instantiate(_buttonPrefab, transform);
-            temp.transform.parent = transform;
+            temp.transform.SetParent(transform);
             temp.menuNameEvent = _menuNameEvent;
             temp.nameMenu = _buttonsName[i];
             temp.SetButton();

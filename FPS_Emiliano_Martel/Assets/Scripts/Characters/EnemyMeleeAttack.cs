@@ -5,31 +5,27 @@ using UnityEngine;
 
 public class EnemyMeleeAttack : Enemy
 {
-    [SerializeField] private Transform _player;
     [SerializeField] private float _attackDistance = 2;
     [SerializeField] private float _waitForAttack = 1.5f;
     [SerializeField] private int _damage = 1;
-    private HealthPoints _hp;
+   
 
     private bool _isAttacking = false;
     private bool _canMoveToPlayer = true;
-
-    public Transform player { set { _player = value; } }
 
     public event Action<bool> onAttack = delegate { };
 
     protected override void Awake()
     {
         base.Awake();
-        if(_player.TryGetComponent<HealthPoints>(out HealthPoints hp))
-            _hp = hp;
+
         p_canMoveToGenerator = false;
     }
 
     protected override void Update()
     {
         base.Update();
-        if ((transform.position - _player.position).magnitude <= _attackDistance && !_isAttacking)
+        if ((transform.position - p_target.position).magnitude <= _attackDistance && !_isAttacking)
         {
             StartCoroutine(Attack());
         }
@@ -37,15 +33,14 @@ public class EnemyMeleeAttack : Enemy
 
     protected override void Move()
     {
-        base.Move();
         if (_canMoveToPlayer)
-            p_agent.SetDestination(_player.transform.position);
+            p_agent.SetDestination(p_target.transform.position);
     }
 
     private void AttackPlayer()
     {
-        if (_hp)
-            _hp.TakeDamage(_damage);
+        if (p_targetHp)
+            p_targetHp.TakeDamage(_damage);
     }
 
     private IEnumerator Attack()

@@ -40,4 +40,18 @@ public class MenuManager : MonoBehaviour
             menu.HandleActiveMenu(false);
         }
     }
+
+    private IEnumerator ActiveMenues(string name)
+    {
+        foreach (var menu in _menues)
+        {
+            yield return new  WaitForSeconds(0.1f);
+            if (menu.menuName == name)
+            {
+                menu.HandleActiveMenu(true);
+                continue;
+            }
+            menu.HandleActiveMenu(false);
+        }
+    }
 }

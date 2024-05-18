@@ -9,7 +9,7 @@ public class SpawnEnemiesController : MonoBehaviour
     public Enemy SpawnEnemy(Transform generatorPosition)
     {
         Enemy enemy = Instantiate(_enemyList[0], transform.position, Quaternion.identity);
-        enemy.target = generatorPosition;
+        enemy.SetTarget(generatorPosition);
         return enemy;
     }
 }

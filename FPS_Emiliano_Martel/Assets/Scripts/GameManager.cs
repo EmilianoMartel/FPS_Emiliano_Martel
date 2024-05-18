@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private int _waveTime = 10;
     [SerializeField] private int _enemyPerWave = 10;
-    [SerializeField] private List<Enemy> _enemyListPrefab = new List<Enemy>();
     [SerializeField] private HealthPoints _generatorLife;
     [SerializeField] private Transform _generatorPosition;
     [SerializeField] private List<SpawnEnemiesController> _spawnList = new List<SpawnEnemiesController>();

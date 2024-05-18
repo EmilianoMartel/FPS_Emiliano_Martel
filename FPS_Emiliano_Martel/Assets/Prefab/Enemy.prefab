@@ -130,8 +130,8 @@ GameObject:
   - component: {fileID: 2218591611076768641}
   - component: {fileID: 2218591611076768655}
   - component: {fileID: 2218591611076768642}
-  - component: {fileID: 2218591611076768645}
   - component: {fileID: 6745584712335251608}
+  - component: {fileID: 932554830128087439}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -241,24 +241,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2218591611076768645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2218591611076768652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 193bf310e6227384f83cadec4506e8d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  p_healthPoints: {fileID: 2218591611076768640}
-  p_waitForDie: 3.2
-  p_agent: {fileID: 2218591611076768642}
-  p_targetGenerator: {fileID: 0}
-  p_lifeView: {fileID: 2218591610100093572}
-  p_speed: 3
 --- !u!114 &6745584712335251608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +253,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f50ffb16712eb14daa7e257bbaa0fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 1
+--- !u!114 &932554830128087439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2218591611076768652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d3eab21e1496b44811a4aeeafc8754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p_healthPoints: {fileID: 2218591611076768640}
+  p_waitForDie: 3.2
+  p_agent: {fileID: 2218591611076768642}
+  p_target: {fileID: 0}
+  p_lifeView: {fileID: 2218591610100093572}
+  _startedGame: {fileID: 11400000, guid: db76f8a20b4b617438a5e3aaa3f01d94, type: 2}
+  p_speed: 3
+  _attackDistance: 2
+  _waitForAttack: 1.5
   _damage: 1
 --- !u!1 &2218591611296667321
 GameObject:
@@ -513,7 +517,7 @@ PrefabInstance:
     - target: {fileID: 9500000, guid: 44202c79934aa8c45b2495a49b6e99b1, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 9c8bbdbbb80196e4393f13e5d53122e8, type: 2}
+      objectReference: {fileID: 9100000, guid: 7dd7833f02c0dc64fb745274c94f94a0, type: 2}
     - target: {fileID: 13700000, guid: 44202c79934aa8c45b2495a49b6e99b1, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -545,7 +549,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100008, guid: 44202c79934aa8c45b2495a49b6e99b1,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8899040933186399412}
+      addedObject: {fileID: 8565857482189560998}
   m_SourcePrefab: {fileID: 100100000, guid: 44202c79934aa8c45b2495a49b6e99b1, type: 3}
 --- !u!95 &813096568915194618 stripped
 Animator:
@@ -565,7 +569,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 813096568924637082}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8899040933186399412
+--- !u!114 &8565857482189560998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -574,9 +578,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 813096568924537138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ead463d87807ba14886ed1ea4900c6fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d45263bd1e9ce6448d886fbddc9427f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   p_animator: {fileID: 813096568915194618}
-  p_enemy: {fileID: 2218591611076768645}
+  p_enemy: {fileID: 932554830128087439}
   _isDie: isDie
+  _isAttacking: isAttacking
