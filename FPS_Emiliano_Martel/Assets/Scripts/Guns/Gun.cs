@@ -112,11 +112,11 @@ public class Gun : Weapon
         _canShoot = false;
 
         if (_shootEvent)
-            _shootEvent.InvokeEvent();
+            _shootEvent?.InvokeEvent();
 
         _ammoLeft--;
         if (_actualAmmoEvent)
-            _actualAmmoEvent.InvokeEvent(_ammoLeft);
+            _actualAmmoEvent?.InvokeEvent(_ammoLeft);
 
         yield return new WaitForSeconds(_timeBetweenShoot);
 

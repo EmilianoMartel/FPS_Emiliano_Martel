@@ -823,7 +823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonsName:
-  - Menu
+  - Back to Menu
   - Exit
   _menuNameEvent: {fileID: 11400000, guid: 8b480393263789a40aacbffd5283fa09, type: 2}
   _buttonPrefab: {fileID: 1875843987906514916, guid: 984e744a93a22734884d6a4545740e72,

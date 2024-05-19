@@ -26,6 +26,8 @@ public class ButtonLogic : MonoBehaviour
         _text.text = _nameMenu;
         if (_nameMenu == "Resume")
             _nameMenu = "Play";
+        if(_nameMenu == "Back to Menu")
+            _nameMenu = "Menu";
     }
 
     private void InvokeEvent()
@@ -33,7 +35,10 @@ public class ButtonLogic : MonoBehaviour
         _menuNameEvent?.InvokeEvent(_nameMenu);
         if (_nameMenu == _playName)
             _startedGame?.InvokeEvent(true);
-        if(_nameMenu == "BackMenu")
+        else if(_text.text == "Back to Menu")
+        {
             _startedGame?.InvokeEvent(false);
+            Time.timeScale = 1;
+        }
     }
 }

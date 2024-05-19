@@ -35,36 +35,57 @@ public class PlayerInputReader : MonoBehaviour
 
     public void SetMoveValue(InputAction.CallbackContext inputContext)
     {
+        if (_paused)
+            return;
+
         _directionEvent.InvokeEvent(inputContext.ReadValue<Vector2>());
     }
 
     public void SetJump(InputAction.CallbackContext inputContext)
     {
+        if (_paused)
+            return;
+
         _jumpEvent.InvokeEvent();
     }
 
     public void SetLook(InputAction.CallbackContext inputContext)
     {
+        if (_paused)
+            return;
+
         _lookEvent.InvokeEvent(inputContext.ReadValue<Vector2>());
     }
 
     public void SetSprint(InputAction.CallbackContext inputContext)
     {
+        if (_paused)
+            return;
+
         _sprintEvent.InvokeEvent(inputContext.ReadValueAsButton());
     }
 
     public void SetShoot(InputAction.CallbackContext inputContext)
     {
+        if (_paused)
+            return;
+
         _isTriggerEvent.InvokeEvent(inputContext.ReadValueAsButton());
     }
 
     public void SetReload(InputAction.CallbackContext inputContext)
     {
+        if (_paused)
+            return;
+
         _reloadEvent.InvokeEvent();
     }
 
     public void SetInteract(InputAction.CallbackContext inputContext)
     {
+        if (_paused)
+            return;
+
         _interactEvent.InvokeEvent();
     }
 
@@ -90,5 +111,7 @@ public class PlayerInputReader : MonoBehaviour
     private void HandleStartedGame(bool isPlaying)
     {
         _isPlaying = isPlaying;
+        if (_isPlaying)
+            _paused = false;
     }
 }
