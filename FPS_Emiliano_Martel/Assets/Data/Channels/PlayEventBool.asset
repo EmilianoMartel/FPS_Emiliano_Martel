@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayEventBool
   m_EditorClassIdentifier: 
   _config:
-    <listenerEvent>k__BackingField: 1
-    <eventLog>k__BackingField: 1
+    <listenerEvent>k__BackingField: 0
+    <eventLog>k__BackingField: 0

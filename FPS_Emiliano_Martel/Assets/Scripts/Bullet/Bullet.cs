@@ -25,6 +25,7 @@ public class Bullet : Character
     protected override void OnDisable()
     {
         base.OnDisable();
+        onDisable?.Invoke(this);
     }
 
     protected override void Awake()
@@ -62,7 +63,6 @@ public class Bullet : Character
 
     protected override void HandleDie()
     {
-        onDisable?.Invoke(this);
         _rigidbody.AddForce(Vector3.zero,ForceMode.Force);
         gameObject.SetActive(false);
     }

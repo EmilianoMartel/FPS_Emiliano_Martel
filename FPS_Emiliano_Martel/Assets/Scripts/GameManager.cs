@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _timeBetweenSpawns = 1;
     [Header("GameOver data")]
     [SerializeField] private BoolDataSO _winData;
+    [SerializeField] private StringChannel _menuNameEvent;
+    [SerializeField] private BoolChanelSo _startedGame;
     [SerializeField] private string _finalSceneName = "FinalScene";
     private List<Enemy> _enemyList = new();
     private int _enemiesDie = 0;
@@ -83,7 +85,8 @@ public class GameManager : MonoBehaviour
     private void WinOrLoseLogic(bool isWinning)
     {
         _winData.boolData = isWinning;
-        SceneManager.LoadScene(_finalSceneName);
+        _menuNameEvent.InvokeEvent(_finalSceneName);
+        _startedGame.InvokeEvent(false);
     }
 
     private int RandomIndexSpawn()

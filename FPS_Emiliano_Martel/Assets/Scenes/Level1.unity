@@ -37582,6 +37582,12 @@ PrefabInstance:
       objectReference: {fileID: 772956462}
     - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
         type: 3}
+      propertyPath: _viewEnemy
+      value: 
+      objectReference: {fileID: 11400000, guid: af659997c8f2ed347a7c00ee7dc074bc,
+        type: 2}
+    - target: {fileID: 590494159077098665, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
       propertyPath: _shootEvent
       value: 
       objectReference: {fileID: 11400000, guid: aca6079765761444b9cbd9436a6ec733,
@@ -37649,6 +37655,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 4495224968130621489, guid: ece627932a704ff4880c6d3bbbbb48a2,
+        type: 3}
+      propertyPath: _shootMoment
+      value: 
+      objectReference: {fileID: 11400000, guid: aca6079765761444b9cbd9436a6ec733,
+        type: 2}
     - target: {fileID: 5489069055474827610, guid: ece627932a704ff4880c6d3bbbbb48a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -39504,9 +39516,21 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 4373669775958641951, guid: f71e32a4f0a822f4f9fcf4f80be4c007,
         type: 3}
+      propertyPath: _startedGame
+      value: 
+      objectReference: {fileID: 11400000, guid: db76f8a20b4b617438a5e3aaa3f01d94,
+        type: 2}
+    - target: {fileID: 4373669775958641951, guid: f71e32a4f0a822f4f9fcf4f80be4c007,
+        type: 3}
       propertyPath: _generatorLife
       value: 
       objectReference: {fileID: 1422173321}
+    - target: {fileID: 4373669775958641951, guid: f71e32a4f0a822f4f9fcf4f80be4c007,
+        type: 3}
+      propertyPath: _menuNameEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b480393263789a40aacbffd5283fa09,
+        type: 2}
     - target: {fileID: 4373669775958641951, guid: f71e32a4f0a822f4f9fcf4f80be4c007,
         type: 3}
       propertyPath: _generatorPosition

@@ -27,7 +27,7 @@ public abstract class ActionChanel<T> : ScriptableObject
 
     public void Unsuscribe(Action<T> action)
     {
-        _event += action;
+        _event -= action;
         if (_config.listenerEvent)
         {
             Debug.Log($"{name}: A listener({action}) was unsuscribed at Event.");
@@ -60,7 +60,7 @@ public abstract class ActionChanel<T1, T2> : ScriptableObject
 
     public void Unsuscribe(Action<T1, T2> action)
     {
-        _event += action;
+        _event -= action;
         if (_config.listenerEvent)
         {
             Debug.Log($"{name}: A listener({action}) was unsuscribed at Event.");
@@ -93,7 +93,7 @@ public abstract class ActionChanel<T1,T2,T3> : ScriptableObject
 
     public void Unsuscribe(Action<T1, T2, T3> action)
     {
-        _event += action;
+        _event -= action;
         if (_config.listenerEvent)
         {
             Debug.Log($"{name}: A listener({action}) was unsuscribed at Event.");

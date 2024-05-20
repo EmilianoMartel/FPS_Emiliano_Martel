@@ -38,12 +38,11 @@ public class Gun : Weapon
 
     [Header("Channels")]
     [SerializeField] private EmptyAction _shootEvent;
-    public Action<bool> viewEnemy = delegate { };
+    [SerializeField] private ActionChanel<bool> _viewEnemy;
     [SerializeField] private ActionChanel<int> _actualAmmoEvent;
     [SerializeField] private ActionChanel<int> _maxAmmoEvent;
     [SerializeField] private ActionChanel<Transform> _pointShootEvent;
     [SerializeField] private ActionChanel<int> _damageValueEvent;
-    [SerializeField] private BoolChanelSo _isTriggerEvent;
     [SerializeField] private EmptyAction _reloadEvent;
 
     protected override void OnEnable()
@@ -55,14 +54,12 @@ public class Gun : Weapon
         if (_pointShootEvent)
             _pointShootEvent.InvokeEvent(_shootPoint);
 
-        _isTriggerEvent.Sucription(HandleSetPressTrigger);
         _reloadEvent.Sucription(HandleReload);
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
-        _isTriggerEvent.Unsuscribe(HandleSetPressTrigger);
         _reloadEvent.Unsuscribe(HandleReload);
     }
 
@@ -94,7 +91,7 @@ public class Gun : Weapon
 
         RaycastHit hit;
 
-        viewEnemy?.Invoke(Physics.Raycast(_shootPoint.position, _shootPoint.forward, out hit, _shootDistance, _enemyMask));
+        _viewEnemy?.InvokeEvent(Physics.Raycast(_shootPoint.position, _shootPoint.forward, out hit, _shootDistance, _enemyMask));
     }
 
     protected override void HandleSetPressTrigger(bool pressTrigger)
@@ -115,19 +112,13 @@ public class Gun : Weapon
             _shootEvent?.InvokeEvent();
 
         _ammoLeft--;
+
         if (_actualAmmoEvent)
             _actualAmmoEvent?.InvokeEvent(_ammoLeft);
 
         yield return new WaitForSeconds(_timeBetweenShoot);
 
-        if (_isAutomatic)
-        {
-            _canShoot = true;
-        }
-        else
-        {
-            _canShoot = false;
-        }
+        _canShoot = _isAutomatic;
 
         _isShooting = false;
     }

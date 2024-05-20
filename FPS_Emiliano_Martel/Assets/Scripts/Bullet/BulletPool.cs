@@ -29,11 +29,13 @@ public class BulletPool : MonoBehaviour
 
     private void OnDisable()
     {
-        if (_shootMomentEvent)
-            _shootMomentEvent.Unsuscribe(HandleShoot);
+        _shootMomentEvent.Unsuscribe(HandleShoot);
 
         if (_pointShootEvent)
             _pointShootEvent.Unsuscribe(HandleSetShootPoint);
+
+        _activeBullets.Clear();
+        _poolBullets.Clear();
     }
 
     private void OnGUI()
@@ -71,12 +73,13 @@ public class BulletPool : MonoBehaviour
             temp.transform.parent = transform;
             return temp;
         }
-
+        _poolBullets[0].onDisable += HandleDesactiveBullet;
         return _poolBullets[0];
     }
 
     private void HandleDesactiveBullet(Bullet bullet)
     {
+        bullet.onDisable -= HandleDesactiveBullet;
         if (_activeBullets.Contains(bullet))
         {
             _activeBullets.Remove(bullet);

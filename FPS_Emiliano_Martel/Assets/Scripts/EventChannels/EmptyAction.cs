@@ -14,13 +14,13 @@ public class EmptyAction : ScriptableObject
         _event += action;
         if (_config.listenerEvent)
         {
-            Debug.Log($"{name}: A listener({action}) was suscribed at Event.");
+            Debug.Log($"{name}: A listener({action.ToString()}) was suscribed at Event.");
         }
     }
 
     public void Unsuscribe(Action action)
     {
-        _event += action;
+        _event -= action;
         if (_config.listenerEvent)
         {
             Debug.Log($"{name}: A listener({action}) was unsuscribed at Event.");
